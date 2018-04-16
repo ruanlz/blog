@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://ruanxinyu.github.io/"/>
-  <updated>2018-04-16T14:34:46.207Z</updated>
+  <updated>2018-04-16T15:27:35.317Z</updated>
   <id>http://ruanxinyu.github.io/</id>
   
   <author>
@@ -15,6 +15,35 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>虚拟机安装CentOS教程</title>
+    <link href="http://ruanxinyu.github.io/2018/04/16/%E8%99%9A%E6%8B%9F%E6%9C%BA%E5%AE%89%E8%A3%85CentOS%E6%95%99%E7%A8%8B/"/>
+    <id>http://ruanxinyu.github.io/2018/04/16/虚拟机安装CentOS教程/</id>
+    <published>2018-04-16T15:20:40.000Z</published>
+    <updated>2018-04-16T15:27:35.317Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="设置虚拟机参数"><a href="#设置虚拟机参数" class="headerlink" title="设置虚拟机参数"></a>设置虚拟机参数</h1><h2 id="小标题1"><a href="#小标题1" class="headerlink" title="小标题1"></a>小标题1</h2><ol><li><p>打开vmware workstations，<code>文件-&gt;新建虚拟机</code>，出现如下界面，选择<code>自定义（高级）</code>选项，下一步继续：</p><img src="/2018/04/16/虚拟机安装CentOS教程/1.jpg" title="[选择操作系统镜像]"></li><li><p>打开vmware workstations，<code>文件-&gt;新建虚拟机</code>，出现如下界面，选择<code>自定义（高级）</code>选项，下一步继续：</p><img src="/2018/04/16/虚拟机安装CentOS教程/1.jpg" title="[选择操作系统镜像]"></li></ol><h1 id="设置CentOS参数"><a href="#设置CentOS参数" class="headerlink" title="设置CentOS参数"></a>设置CentOS参数</h1><ol><li>打开vmware workstations，<code>文件-&gt;新建虚拟机</code>，出现如下界面，选择<code>自定义（高级）</code>选项，下一步继续：<img src="/2018/04/16/虚拟机安装CentOS教程/1.jpg" title="[选择操作系统镜像]"></li></ol>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h1 id=&quot;设置虚拟机参数&quot;&gt;&lt;a href=&quot;#设置虚拟机参数&quot; class=&quot;headerlink&quot; title=&quot;设置虚拟机参数&quot;&gt;&lt;/a&gt;设置虚拟机参数&lt;/h1&gt;&lt;h2 id=&quot;小标题1&quot;&gt;&lt;a href=&quot;#小标题1&quot; class=&quot;headerlink&quot; titl
+      
+    
+    </summary>
+    
+      <category term="技术分享" scheme="http://ruanxinyu.github.io/categories/%E6%8A%80%E6%9C%AF%E5%88%86%E4%BA%AB/"/>
+    
+      <category term="工具安装" scheme="http://ruanxinyu.github.io/categories/%E6%8A%80%E6%9C%AF%E5%88%86%E4%BA%AB/%E5%B7%A5%E5%85%B7%E5%AE%89%E8%A3%85/"/>
+    
+    
+      <category term="工具安装" scheme="http://ruanxinyu.github.io/tags/%E5%B7%A5%E5%85%B7%E5%AE%89%E8%A3%85/"/>
+    
+      <category term="操作系统" scheme="http://ruanxinyu.github.io/tags/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/"/>
+    
+  </entry>
   
   <entry>
     <title>JDK安装教程</title>
