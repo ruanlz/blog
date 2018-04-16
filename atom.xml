@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
-  <title>RuanXinYu&#39;s Blog</title>
+  <title>RuanLinzheng&#39;s Blog</title>
   <icon>https://www.gravatar.com/avatar/efaf7255d0acf18755aba4ade84c6294</icon>
   <subtitle>路漫漫其修远兮，吾将上下而求索</subtitle>
   <link href="/atom.xml" rel="self"/>
@@ -10,7 +10,7 @@
   <id>http://ruanxinyu.github.io/</id>
   
   <author>
-    <name>阮新宇</name>
+    <name>阮临政</name>
     <email>1096421257@qq.com</email>
   </author>
   
