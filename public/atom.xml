@@ -1,0 +1,464 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>ruanlz&#39;s Blog</title>
+  <icon>https://www.gravatar.com/avatar/efaf7255d0acf18755aba4ade84c6294</icon>
+  <subtitle>路漫漫其修远兮，吾将上下而求索</subtitle>
+  <link href="/atom.xml" rel="self"/>
+  
+  <link href="http://ruanlz.github.io/"/>
+  <updated>2018-04-26T14:20:25.828Z</updated>
+  <id>http://ruanlz.github.io/</id>
+  
+  <author>
+    <name>阮新宇</name>
+    <email>1096421257@qq.com</email>
+  </author>
+  
+  <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title></title>
+    <link href="http://ruanlz.github.io/2018/04/26/%E4%BD%BF%E7%94%A8Github%E5%92%8CHexo%E6%90%AD%E5%BB%BA%E5%8D%9A%E5%AE%A2/"/>
+    <id>http://ruanlz.github.io/2018/04/26/使用Github和Hexo搭建博客/</id>
+    <published>2018-04-26T15:53:29.242Z</published>
+    <updated>2018-04-26T14:20:25.828Z</updated>
+    
+    <content type="html"><![CDATA[<p>相关步骤：<br>1、安装Node.js和配置好Node.js环境，打开cmd命令行，成功界面如下</p><p> 2、安装Git和配置好Git环境，安装成功的象征就是在电脑上任何位置鼠标右键能够出现如下两个选择</p><p>注意：一般出于安全考虑，只有在Git Bash Here中才能进行Git的相关操作。如果需要在cmd命令行里调用Git，那么就要配置电脑的环境变量Path，或者在安装的时候选择use Git from the Windows Command Prompt。这个可有可无，影响不大，成功配置的界面如图</p><p> 3、Github账户注册和新建项目，项目必须要遵守格式：账户名.github.io，不然接下来会有很多麻烦。并且需要勾选Initialize this repository with a README</p><p>在建好的项目右侧有个settings按钮，点击它，向下拉到GitHub Pages，你会看到那边有个网址，访问它，你将会惊奇的发现该项目已经被部署到网络上，能够通过外网来访问它。 </p><p> 4、安装Hexo，在自己认为合适的地方创个文件夹，我是在D盘建了一个blog文件夹。然后通过命令行进入到该文件夹里面</p><p>输入npm install hexo -g，开始安装Hexo</p><p>输入hexo -v，检查hexo是否安装成功</p><p>输入hexo init，初始化该文件夹（有点漫长的等待。。。）</p><p>看到后面的“Start blogging with Hexo！”，激动有木有！！！！！</p><p>输入npm install，安装所需要的组件</p><p>输入hexo g，首次体验Hexo</p><p> 输入hexo s，开启服务器，访问该网址，正式体验Hexo</p><p>问题：假如页面一直无法跳转，那么可能端口被占用了。此时我们ctrl+c停止服务器，接着输入“hexo server -p 端口号”来改变端口号</p><p>那么出现如下图就成功了</p><p> 5、将Hexo与Github page联系起来，设置Git的user name和email（如果是第一次的话）</p><p>上图是在其文件夹里面鼠标右键，点击Git Base Here。这里“feng”可以替换成自己的用户名，邮箱可以替换成自己的邮箱</p><p>输入cd ~/.ssh，检查是否由.ssh的文件夹</p><p>输入ls，列出该文件下的内容。下图说明存在</p><p> 输入ssh-keygen -t rsa -C “<a href="mailto:929762930@qq.com" target="_blank" rel="noopener">929762930@qq.com</a>”，连续三个回车，生成密钥，最后得到了两个文件：id_rsa和id_rsa.pub（默认存储路径是：C:\Users\Administrator.ssh）。</p><p> 输入eval “$(ssh-agent -s)”，添加密钥到ssh-agent</p><p> 再输入ssh-add ~/.ssh/id_rsa，添加生成的SSH key到ssh-agent</p><p> 登录Github，点击头像下的settings，添加ssh</p><p>新建一个new ssh key，将id_rsa.pub文件里的内容复制上去</p><p>输入ssh -T <a href="mailto:git@github.com" target="_blank" rel="noopener">git@github.com</a>，测试添加ssh是否成功。如果看到Hi后面是你的用户名，就说明成功了</p><p>问题：假如ssh-key配置失败，那么只要以下步骤就能完全解决<br>首先，清除所有的key-pair<br>ssh-add -D<br>rm -r ~/.ssh<br>删除你在github中的public-key<br>重新生成ssh密钥对<br>ssh-keygen -t rsa -C “<a href="mailto:xxx@xxx.com" target="_blank" rel="noopener">xxx@xxx.com</a>“<br>接下来正常操作<br>在github上添加公钥public-key:<br>1、首先在你的终端运行 xclip -sel c ~/.ssh/id_rsa.pub将公钥内容复制到剪切板<br>2、在github上添加公钥时，直接复制即可<br>3、保存<br>测试：<br>在终端 ssh -T <a href="mailto:git@github.com" target="_blank" rel="noopener">git@github.com</a></p><p>6、配置Deployment，在其文件夹中，找到_config.yml文件，修改repo值（在末尾）</p><p>repo值是你在github项目里的ssh（右下角）</p><p>7、新建一篇博客，在cmd执行命令：hexo new post “博客名”</p><p> 这时候在文件夹_posts目录下将会看到已经创建的文件</p><p>在生成以及部署文章之前，需要安装一个扩展：npm install hexo-deployer-git –save</p><p>使用编辑器编好文章，那么就可以使用命令：hexo d -g，生成以及部署了</p><p>部署成功后访问你的地址：http://用户名.github.io。那么将看到生成的文章</p><p> 好了，到此为止，最基本的也是最全面的hexo+github搭建博客完结。</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;相关步骤：&lt;br&gt;1、安装Node.js和配置好Node.js环境，打开cmd命令行，成功界面如下&lt;/p&gt;
+&lt;p&gt; 2、安装Git和配置好Git环境，安装成功的象征就是在电脑上任何位置鼠标右键能够出现如下两个选择&lt;/p&gt;
+&lt;p&gt;注意：一般出于安全考虑，只有在Git Bash
+      
+    
+    </summary>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>Nihao,blog</title>
+    <link href="http://ruanlz.github.io/2018/04/21/Nihao-blog/"/>
+    <id>http://ruanlz.github.io/2018/04/21/Nihao-blog/</id>
+    <published>2018-04-21T14:09:32.000Z</published>
+    <updated>2018-04-21T14:09:32.185Z</updated>
+    
+    <summary type="html">
+    
+    </summary>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>归并排序</title>
+    <link href="http://ruanlz.github.io/2018/04/16/%E5%BD%92%E5%B9%B6%E6%8E%92%E5%BA%8F/"/>
+    <id>http://ruanlz.github.io/2018/04/16/归并排序/</id>
+    <published>2018-04-16T15:20:40.000Z</published>
+    <updated>2018-04-26T14:20:25.793Z</updated>
+    
+    <content type="html"><![CDATA[<p>归并排序是创建在归并操作上的一种有效的排序算法，效率为O(nlogn)，1945年由冯·诺伊曼首次提出。<br>归并排序算法主要依赖归并(Merge)操作。归并操作指的是将两个已经排序的序列合并成一个序列的操作，归并操作步骤如下：</p><pre><code>1. 申请空间，使其大小为两个已经排序序列之和，该空间用来存放合并后的序列2. 设定两个指针，最初位置分别为两个已经排序序列的起始位置3. 比较两个指针所指向的元素，选择相对小的元素放入到合并空间，并移动指针到下一位置4. 重复步骤3直到某一指针到达序列尾5. 将另一序列剩下的所有元素直接复制到合并序列尾</code></pre><p>归并排序的代码如下：</p><p>#include &lt;stdio.h&gt;</p><p>#include &lt;limits.h&gt;<br>// 分类 ————– 内部比较排序<br>// 数据结构 ———- 数组<br>// 最差时间复杂度 —- O(nlogn)<br>// 最优时间复杂度 —- O(nlogn)<br>// 平均时间复杂度 —- O(nlogn)<br>// 所需辅助空间 —— O(n)<br>// 稳定性 ———— 稳定<br>void Merge(int A[], int left, int mid, int right)// 合并两个已排好序的数组A[left…mid]和A[mid+1…right]<br>{<br>    int len = right - left + 1;<br>    int <em>temp = new int[len];       // 辅助空间O(n)<br>    int index = 0;<br>    int i = left;                   // 前一数组的起始元素<br>    int j = mid + 1;                // 后一数组的起始元素<br>    while (i &lt;= mid &amp;&amp; j &lt;= right)<br>    {<br>        temp[index++] = A[i] &lt;= A[j] ? A[i++] : A[j++];  // 带等号保证归并排序的稳定性<br>    }<br>    while (i &lt;= mid)<br>    {<br>        temp[index++] = A[i++];<br>    }<br>    while (j &lt;= right)<br>    {<br>        temp[index++] = A[j++];<br>    }<br>    for (int k = 0; k &lt; len; k++)<br>    {<br>        A[left++] = temp[k];<br>    }<br>}<br>void MergeSortRecursion(int A[], int left, int right)    // 递归实现的归并排序(自顶向下)<br>{<br>    if (left == right)    // 当待排序的序列长度为1时，递归开始回溯，进行merge操作<br>        return;<br>    int mid = (left + right) / 2;<br>    MergeSortRecursion(A, left, mid);<br>    MergeSortRecursion(A, mid + 1, right);<br>    Merge(A, left, mid, right);<br>}<br>void MergeSortIteration(int A[], int len)    // 非递归(迭代)实现的归并排序(自底向上)<br>{<br>    int left, mid, right;// 子数组索引,前一个为A[left…mid]，后一个子数组为A[mid+1…right]<br>    for (int i = 1; i &lt; len; i </em>= 2)        // 子数组的大小i初始为1，每轮翻倍<br>    {<br>        left = 0;<br>        while (left + i &lt; len)              // 后一个子数组存在(需要归并)<br>        {<br>            mid = left + i - 1;<br>            right = mid + i &lt; len ? mid + i : len - 1;// 后一个子数组大小可能不够<br>            Merge(A, left, mid, right);<br>            left = right + 1;               // 前一个子数组索引向后移动<br>        }<br>    }<br>}<br>int main()<br>{<br>    int A1[] = { 6, 5, 3, 1, 8, 7, 2, 4 };      // 从小到大归并排序<br>    int A2[] = { 6, 5, 3, 1, 8, 7, 2, 4 };<br>    int n1 = sizeof(A1) / sizeof(int);<br>    int n2 = sizeof(A2) / sizeof(int);<br>    MergeSortRecursion(A1, 0, n1 - 1);          // 递归实现<br>    MergeSortIteration(A2, n2);                 // 非递归实现<br>    printf(“递归实现的归并排序结果：”);<br>    for (int i = 0; i &lt; n1; i++)<br>    {<br>        printf(“%d “, A1[i]);<br>    }<br>    printf(“\n”);<br>    printf(“非递归实现的归并排序结果：”);<br>    for (int i = 0; i &lt; n2; i++)<br>    {<br>        printf(“%d “, A2[i]);<br>    }<br>    printf(“\n”);<br>    return 0;<br>}</p><p>上述代码对序列{ 6, 5, 3, 1, 8, 7, 2, 4 }进行归并排序的实例如下</p><p>使用归并排序为一列数字进行排序的宏观过程：</p><p>归并排序除了可以对数组进行排序，还可以高效的求出数组小和（即单调和）以及数组中的逆序对，详见这篇博文。</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;归并排序是创建在归并操作上的一种有效的排序算法，效率为O(nlogn)，1945年由冯·诺伊曼首次提出。&lt;br&gt;归并排序算法主要依赖归并(Merge)操作。归并操作指的是将两个已经排序的序列合并成一个序列的操作，归并操作步骤如下：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;1. 申请空
+      
+    
+    </summary>
+    
+      <category term="基础知识" scheme="http://ruanlz.github.io/categories/%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/"/>
+    
+      <category term="算法排序" scheme="http://ruanlz.github.io/categories/%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/%E7%AE%97%E6%B3%95%E6%8E%92%E5%BA%8F/"/>
+    
+    
+      <category term="算法排序" scheme="http://ruanlz.github.io/tags/%E7%AE%97%E6%B3%95%E6%8E%92%E5%BA%8F/"/>
+    
+      <category term="基础知识" scheme="http://ruanlz.github.io/tags/%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>虚拟机qqqqqqqqqqqqqq</title>
+    <link href="http://ruanlz.github.io/2018/04/16/new/"/>
+    <id>http://ruanlz.github.io/2018/04/16/new/</id>
+    <published>2018-04-16T15:20:40.000Z</published>
+    <updated>2018-04-26T14:16:52.431Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="设置虚拟机参数"><a href="#设置虚拟机参数" class="headerlink" title="设置虚拟机参数"></a>设置虚拟机参数</h1><h2 id="小标题1"><a href="#小标题1" class="headerlink" title="小标题1"></a>小标题1</h2><ol><li><p>打开vmware workstations，<code>文件-&gt;新建虚拟机</code>，出现如下界面，选择<code>自定义（高级）</code>选项，下一步继续：               ffffffffffffff</p></li><li><p>打sffser开vmware workstations，<code>文件-&gt;新建虚拟机</code>，出现如下界面，选择<code>自定义（高级）</code>选项，下一步继续fffffffffffffssssss：</p></li></ol><h1 id="设置CentOS参数"><a href="#设置CentOS参数" class="headerlink" title="设置CentOS参数"></a>设置CentOS参数</h1><ol><li>打开vmware workstations，<code>文件-&gt;新建虚拟机</code>，出现如下界面，选择<code>自定义（高级）</code>选项，下一步继续：</li></ol>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h1 id=&quot;设置虚拟机参数&quot;&gt;&lt;a href=&quot;#设置虚拟机参数&quot; class=&quot;headerlink&quot; title=&quot;设置虚拟机参数&quot;&gt;&lt;/a&gt;设置虚拟机参数&lt;/h1&gt;&lt;h2 id=&quot;小标题1&quot;&gt;&lt;a href=&quot;#小标题1&quot; class=&quot;headerlink&quot; titl
+      
+    
+    </summary>
+    
+      <category term="技术分享" scheme="http://ruanlz.github.io/categories/%E6%8A%80%E6%9C%AF%E5%88%86%E4%BA%AB/"/>
+    
+      <category term="工具安装" scheme="http://ruanlz.github.io/categories/%E6%8A%80%E6%9C%AF%E5%88%86%E4%BA%AB/%E5%B7%A5%E5%85%B7%E5%AE%89%E8%A3%85/"/>
+    
+    
+      <category term="工具安装" scheme="http://ruanlz.github.io/tags/%E5%B7%A5%E5%85%B7%E5%AE%89%E8%A3%85/"/>
+    
+      <category term="操作系统" scheme="http://ruanlz.github.io/tags/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>选择排序</title>
+    <link href="http://ruanlz.github.io/2018/04/16/%E9%80%89%E6%8B%A9%E6%8E%92%E5%BA%8F/"/>
+    <id>http://ruanlz.github.io/2018/04/16/选择排序/</id>
+    <published>2018-04-16T15:20:40.000Z</published>
+    <updated>2018-04-26T14:20:25.791Z</updated>
+    
+    <content type="html"><![CDATA[<p>选择排序也是一种简单直观的排序算法。它的工作原理很容易理解：初始时在序列中找到最小（大）元素，放到序列的起始位置作为已排序序列；然后，再从剩余未排序元素中继续寻找最小（大）元素，放到已排序序列的末尾。以此类推，直到所有元素均排序完毕。<br>注意选择排序与冒泡排序的区别：冒泡排序通过依次交换相邻两个顺序不合法的元素位置，从而将当前最小（大）元素放到合适的位置；而选择排序每遍历一次都记住了当前最小（大）元素的位置，最后仅需一次交换操作即可将其放到合适的位置。<br>选择排序的代码如下：</p><p>#include &lt;stdio.h&gt;<br>// 分类 ————– 内部比较排序<br>// 数据结构 ———- 数组<br>// 最差时间复杂度 —- O(n^2)<br>// 最优时间复杂度 —- O(n^2)<br>// 平均时间复杂度 —- O(n^2)<br>// 所需辅助空间 —— O(1)<br>// 稳定性 ———— 不稳定<br>void Swap(int A[], int i, int j)<br>{<br>    int temp = A[i];<br>    A[i] = A[j];<br>    A[j] = temp;<br>}<br>void SelectionSort(int A[], int n)<br>{<br>    for (int i = 0; i &lt; n - 1; i++)         // i为已排序序列的末尾<br>    {<br>        int min = i;<br>        for (int j = i + 1; j &lt; n; j++)     // 未排序序列<br>        {<br>            if (A[j] &lt; A[min])              // 找出未排序序列中的最小值<br>            {<br>                min = j;<br>            }<br>        }<br>        if (min != i)<br>        {<br>            Swap(A, min, i);    // 放到已排序序列的末尾，该操作很有可能把稳定性打乱，所以选择排序是不稳定的排序算法<br>        }<br>    }<br>}<br>int main()<br>{<br>    int A[] = { 8, 5, 2, 6, 9, 3, 1, 4, 0, 7 }; // 从小到大选择排序<br>    int n = sizeof(A) / sizeof(int);<br>    SelectionSort(A, n);<br>    printf(“选择排序结果：”);<br>    for (int i = 0; i &lt; n; i++)<br>    {<br>        printf(“%d “, A[i]);<br>    }<br>    printf(“\n”);<br>    return 0;<br>}</p><p> 　　上述代码对序列{ 8, 5, 2, 6, 9, 3, 1, 4, 0, 7 }进行选择排序的实现过程如右图</p><p>使用选择排序为一列数字进行排序的宏观过程：</p><p>选择排序是不稳定的排序算法，不稳定发生在最小元素与A[i]交换的时刻。<br>比如序列：{ 5, 8, 5, 2, 9 }，一次选择的最小元素是2，然后把2和第一个5进行交换，从而改变了两个元素5的相对次序。</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;选择排序也是一种简单直观的排序算法。它的工作原理很容易理解：初始时在序列中找到最小（大）元素，放到序列的起始位置作为已排序序列；然后，再从剩余未排序元素中继续寻找最小（大）元素，放到已排序序列的末尾。以此类推，直到所有元素均排序完毕。&lt;br&gt;注意选择排序与冒泡排序的区别：冒
+      
+    
+    </summary>
+    
+      <category term="基础知识" scheme="http://ruanlz.github.io/categories/%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/"/>
+    
+      <category term="算法排序" scheme="http://ruanlz.github.io/categories/%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/%E7%AE%97%E6%B3%95%E6%8E%92%E5%BA%8F/"/>
+    
+    
+      <category term="算法排序" scheme="http://ruanlz.github.io/tags/%E7%AE%97%E6%B3%95%E6%8E%92%E5%BA%8F/"/>
+    
+      <category term="基础知识" scheme="http://ruanlz.github.io/tags/%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>冒泡排序</title>
+    <link href="http://ruanlz.github.io/2018/04/16/%E5%86%92%E6%B3%A1%E6%8E%92%E5%BA%8F/"/>
+    <id>http://ruanlz.github.io/2018/04/16/冒泡排序/</id>
+    <published>2018-04-16T15:20:40.000Z</published>
+    <updated>2018-04-26T14:20:25.790Z</updated>
+    
+    <content type="html"><![CDATA[<pre><code>1.原理：比较两个相邻的元素，将值大的元素交换至右端。思路：依次比较相邻的两个数，将小数放在前面，大数放在后面。即在第一趟：首先比较第1个和第2个数，将小数放前，大数放后。然后比较第2个数和第3个数，将小数放前，大数放后，如此继续，直至比较最后两个数，将小数放前，大数放后。重复第一趟步骤，直至全部排序完成。举例说明：要排序数组：int[] arr={6,3,8,2,9,1};   第一趟排序：第一次排序：6和3比较，6大于3，交换位置：  3  6  8  2  9  1第二次排序：6和8比较，6小于8，不交换位置：3  6  8  2  9  1第三次排序：8和2比较，8大于2，交换位置：  3  6  2  8  9  1第四次排序：8和9比较，8小于9，不交换位置：3  6  2  8  9  1第五次排序：9和1比较：9大于1，交换位置：  3  6  2  8  1  9第一趟总共进行了5次比较， 排序结果：      3  6  2  8  1  9---------------------------------------------------------------------第二趟排序：第一次排序：3和6比较，3小于6，不交换位置：3  6  2  8  1  9第二次排序：6和2比较，6大于2，交换位置：  3  2  6  8  1  9第三次排序：6和8比较，6大于8，不交换位置：3  2  6  8  1  9第四次排序：8和1比较，8大于1，交换位置：  3  2  6  1  8  9第二趟总共进行了4次比较， 排序结果：      3  2  6  1  8  9---------------------------------------------------------------------第三趟排序：第一次排序：3和2比较，3大于2，交换位置：  2  3  6  1  8  9第二次排序：3和6比较，3小于6，不交换位置：2  3  6  1  8  9第三次排序：6和1比较，6大于1，交换位置：  2  3  1  6  8  9第二趟总共进行了3次比较， 排序结果：         2  3  1  6  8  9---------------------------------------------------------------------第四趟排序：第一次排序：2和3比较，2小于3，不交换位置：2  3  1  6  8  9第二次排序：3和1比较，3大于1，交换位置：  2  1  3  6  8  9第二趟总共进行了2次比较， 排序结果：        2  1  3  6  8  9---------------------------------------------------------------------第五趟排序：第一次排序：2和1比较，2大于1，交换位置：  1  2  3  6  8  9第二趟总共进行了1次比较， 排序结果：  1  2  3  6  8  9---------------------------------------------------------------------最终结果：1  2  3  6  8  9---------------------------------------------------------------------</code></pre><p>2.代码实现<br>    代码实现：<br>    /*</p><pre><code> * 冒泡排序 */public class BubbleSort {　　public static void  BubbleSort1(int[] arr){　　　        int i = 0, j = 0;        Int size=arr.length;        for (i = 0; i &lt; size - 1; i++)//一共要排序size-1次        {            for (j = 0; j &lt; size - 1 - i; j++)//选出该趟排序的最大值往后移动            {                if (arr[j] &gt; arr[j + 1])                {                    int tmp = arr[j];                    arr[j] = arr[j + 1];                    arr[j + 1] = tmp;                }            }        }　　} }</code></pre><p>3、算法分析<br>（1）算法的最好时间复杂度<br>    　若文件的初始状态是正序的，一趟扫描即可完成排序。所需的关键字比较次数C和记录移动次数M均达到最小值：<br>        C(min)=n-1<br>        M(min)=0。<br>    　冒泡排序最好的时间复杂度为O(n)。</p><p>（2）算法的最坏时间复杂度<br>    　若初始文件是反序的，需要进行n-1趟排序。每趟排序要进行n-i次关键字的比较(1≤i≤n-1)，且每次比较都必须移动记录三次来达到交换记录位置。在这种情况下，比较和移动次数均达到最大值：<br>        C(max)=n(n-1)/2=O(n^2)<br>        M(max)=3n(n-1)/2=O(n^2)<br>    　冒泡排序的最坏时间复杂度为O(n^2)。</p><p>（3）算法的平均时间复杂度为O(n^2)<br>    　虽然冒泡排序不一定要进行n-1趟，但由于它的记录移动次数较多，故平均时间性能比直接插入排序要差得多。</p><p>（4）算法稳定性<br>    　冒泡排序是就地排序，且它是稳定的。<br>4.优化1（优化外层循环）：<br>    　若在某一趟排序中未发现气泡位置的交换，则说明待排序的无序区中所有气泡均满足轻者在上，重者在下的原则，因此，冒泡排序过程可在此趟排序后终止。为此，在下面给出的算法中，引入一个标签flag，在每趟排序开始前，先将其置为0。若排序过程中发生了交换，则将其置为1。各趟排序结束时检查flag，若未曾发生过交换则终止算法，不再进行下一趟排序。</p><p>具体算法：</p><ol><li>//冒泡排序优化1  </li><li>void BubbleSort2(int[] arr)  </li><li>{  </li><li></li><li>int i = 0, j = 0;<br>int size = arr.length; </li><li></li><li>for (i = 0; i &lt; size - 1; i++)//一共要排序size-1次  </li><li>{  </li><li>//每次遍历标志位都要先置为0，才能判断后面的元素是否发生了交换  </li><li>int flag = 0;  </li><li></li><li>for (j = 0; j &lt; size - 1 - i; j++)//选出该趟排序的最大值往后移动  </li><li>{  </li><li>if (arr[j] &gt; arr[j + 1])  </li><li>{  </li><li>int tmp = arr[j];  </li><li>arr[j] = arr[j + 1];  </li><li>arr[j + 1] = tmp;  </li><li>flag = 1;//只要有发生了交换，flag就置为1  </li><li>}  </li><li>}  </li><li></li><li>//判断标志位是否为0，如果为0，说明后面的元素已经有序，就直接return  </li><li>if (flag == 0)  </li><li>{  </li><li>return;  </li><li>}  </li><li>}  </li><li></li><li>}  </li></ol><p>5、算法优化2（优化内层循环）</p><p>   (1)记住最后一次交换发生位置lastExchange的冒泡排序<br>在每趟扫描中，记住最后一次交换发生的位置lastExchange，（该位置之后的相邻记录均已有序）。下一趟排序开始时，R[1..lastExchange-1]是无序区，R[lastExchange..n]是有序区。这样，一趟排序可能使当前无序区扩充多个记录，因此记住最后一次交换发生的位置lastExchange，从而减少排序的趟数。<br>具体算法：<br>[cpp]<br>view plain<br>copy</p><ol start="31"><li>//冒泡排序优化2  </li><li>void BubbleSort3(int[] arr)  </li><li>{  </li><li></li><li>int i = 0, j = 0;</li><li>int size = arr.length;  </li><li>int k = size - 1,pos = 0;//pos变量用来标记循环里最后一次交换的位置    </li><li></li><li>for (i = 0; i &lt; size - 1; i++)//一共要排序size-1次  </li><li>{  </li><li>//每次遍历标志位都要先置为0，才能判断后面的元素是否发生了交换  </li><li>int flag = 0;  </li><li></li><li>for (j = 0; j &lt;k; j++)//选出该趟排序的最大值往后移动  </li><li>{  </li><li>if (arr[j] &gt; arr[j + 1])  </li><li>{  </li><li>int tmp = arr[j];  </li><li>arr[j] = arr[j + 1];  </li><li>arr[j + 1] = tmp;  </li><li>flag = 1;//只要有发生了交换，flag就置为1  </li><li>pos = j;//循环里最后一次交换的位置 j赋给pos  </li><li>}  </li><li>}  </li><li></li><li>k = pos;  </li><li>//判断标志位是否为0，如果为0，说明后面的元素已经有序，就直接return  </li><li>if (flag == 0)  </li><li>{  </li><li>return;  </li><li>}  </li><li>}  </li><li></li><li>}  </li></ol>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;pre&gt;&lt;code&gt;1.原理：比较两个相邻的元素，将值大的元素交换至右端。
+思路：依次比较相邻的两个数，将小数放在前面，大数放在后面。即在第一趟：首先比较第1个和第2个数，将小数放前，大数放后。然后比较第2个数和第3个数，将小数放前，大数放后，如此继续，直至比较最后两个数，将小
+      
+    
+    </summary>
+    
+      <category term="基础知识" scheme="http://ruanlz.github.io/categories/%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/"/>
+    
+      <category term="算法排序" scheme="http://ruanlz.github.io/categories/%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/%E7%AE%97%E6%B3%95%E6%8E%92%E5%BA%8F/"/>
+    
+    
+      <category term="算法排序" scheme="http://ruanlz.github.io/tags/%E7%AE%97%E6%B3%95%E6%8E%92%E5%BA%8F/"/>
+    
+      <category term="基础知识" scheme="http://ruanlz.github.io/tags/%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>基数排序</title>
+    <link href="http://ruanlz.github.io/2018/04/16/%E5%9F%BA%E6%95%B0%E6%8E%92%E5%BA%8F/"/>
+    <id>http://ruanlz.github.io/2018/04/16/基数排序/</id>
+    <published>2018-04-16T15:20:40.000Z</published>
+    <updated>2018-04-26T14:20:25.798Z</updated>
+    
+    <content type="html"><![CDATA[<p>基数排序的发明可以追溯到1887年赫尔曼·何乐礼在打孔卡片制表机上的贡献。它是这样实现的：将所有待比较正整数统一为同样的数位长度，数位较短的数前面补零。然后，从最低位开始进行基数为10的计数排序，一直到最高位计数排序完后，数列就变成一个有序序列（利用了计数排序的稳定性）。<br>基数排序的实现代码如下：</p><p>#include<iostream><br>using namespace std;<br>// 分类 ————- 内部非比较排序<br>// 数据结构 ———- 数组<br>// 最差时间复杂度 —- O(n <em> dn)<br>// 最优时间复杂度 —- O(n </em> dn)<br>// 平均时间复杂度 —- O(n <em> dn)<br>// 所需辅助空间 —— O(n </em> dn)<br>// 稳定性 ———– 稳定<br>const int dn = 3;                // 待排序的元素为三位数及以下<br>const int k = 10;                // 基数为10，每一位的数字都是[0,9]内的整数<br>int C[k];<br>int GetDigit(int x, int d)          // 获得元素x的第d位数字<br>{<br>    int radix[] = { 1, 1, 10, 100 };// 最大为三位数，所以这里只要到百位就满足了<br>    return (x / radix[d]) % 10;<br>}<br>void CountingSort(int A[], int n, int d)// 依据元素的第d位数字，对A数组进行计数排序<br>{<br>    for (int i = 0; i &lt; k; i++)<br>    {<br>        C[i] = 0;<br>    }<br>    for (int i = 0; i &lt; n; i++)<br>    {<br>        C[GetDigit(A[i], d)]++;<br>    }<br>    for (int i = 1; i &lt; k; i++)<br>    {<br>        C[i] = C[i] + C[i - 1];<br>    }<br>    int <em>B = (int</em>)malloc(n * sizeof(int));<br>    for (int i = n - 1; i &gt;= 0; i–)<br>    {<br>        int dight = GetDigit(A[i], d);  // 元素A[i]当前位数字为dight<br>        B[–C[dight]] = A[i];           // 根据当前位数字，把每个元素A[i]放到它在输出数组B中的正确位置上<br>        // 当再遇到当前位数字同为dight的元素时，会将其放在当前元素的前一个位置上保证计数排序的稳定性<br>    }<br>    for (int i = 0; i &lt; n; i++)<br>    {<br>        A[i] = B[i];<br>    }<br>    free(B);<br>}<br>void LsdRadixSort(int A[], int n)     // 最低位优先基数排序<br>{<br>    for (int d = 1; d &lt;= dn; d++)     // 从低位到高位<br>        CountingSort(A, n, d);        // 依据第d位数字对A进行计数排序<br>}<br>int main()<br>{<br>    int A[] = { 20, 90, 64, 289, 998, 365, 852, 123, 789, 456 };// 针对基数排序设计的输入<br>    int n = sizeof(A) / sizeof(int);<br>    LsdRadixSort(A, n);<br>    printf(“基数排序结果：”);<br>    for (int i = 0; i &lt; n; i++)<br>    {<br>        printf(“%d “, A[i]);<br>    }<br>    printf(“\n”);<br>    return 0;<br>}</iostream></p><p>下图给出了对{ 329, 457, 657, 839, 436, 720, 355 }进行基数排序的简单演示过程<br><img src="\基数排序\jishu.jpg" alt="图片"></p><p>基数排序的时间复杂度是O(n * dn)，其中n是待排序元素个数，dn是数字位数。这个时间复杂度不一定优于O(n log n)，dn的大小取决于数字位的选择（比如比特位数），和待排序数据所属数据类型的全集的大小；dn决定了进行多少轮处理，而n是每轮处理的操作数目。<br>如果考虑和比较排序进行对照，基数排序的形式复杂度虽然不一定更小，但由于不进行比较，因此其基本操作的代价较小，而且如果适当的选择基数，dn一般不大于log n，所以基数排序一般要快过基于比较的排序，比如快速排序。由于整数也可以表达字符串（比如名字或日期）和特定格式的浮点数，所以基数排序并不是只能用于整数排序。</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;基数排序的发明可以追溯到1887年赫尔曼·何乐礼在打孔卡片制表机上的贡献。它是这样实现的：将所有待比较正整数统一为同样的数位长度，数位较短的数前面补零。然后，从最低位开始进行基数为10的计数排序，一直到最高位计数排序完后，数列就变成一个有序序列（利用了计数排序的稳定性）。&lt;
+      
+    
+    </summary>
+    
+      <category term="基础知识" scheme="http://ruanlz.github.io/categories/%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/"/>
+    
+      <category term="算法排序" scheme="http://ruanlz.github.io/categories/%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/%E7%AE%97%E6%B3%95%E6%8E%92%E5%BA%8F/"/>
+    
+    
+      <category term="算法排序" scheme="http://ruanlz.github.io/tags/%E7%AE%97%E6%B3%95%E6%8E%92%E5%BA%8F/"/>
+    
+      <category term="基础知识" scheme="http://ruanlz.github.io/tags/%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>堆排序</title>
+    <link href="http://ruanlz.github.io/2018/04/16/%E5%A0%86%E6%8E%92%E5%BA%8F/"/>
+    <id>http://ruanlz.github.io/2018/04/16/堆排序/</id>
+    <published>2018-04-16T15:20:40.000Z</published>
+    <updated>2018-04-26T14:20:25.828Z</updated>
+    
+    <content type="html"><![CDATA[<p>一、基础知识<br>我们通常所说的堆是指二叉堆，二叉堆又称完全二叉树或者叫近似完全二叉树。二叉堆又分为最大堆和最小堆。<br>堆排序(Heapsort)是指利用堆这种数据结构所设计的一种排序算法，它是选择排序的一种。可以利用数组的特点快速定位指定索引的元素。数组可以根据索引直接获取元素，时间复杂度为O（1），也就是常量，因此对于取值效率极高。<br>最大堆的特性如下：</p><p>父结点的键值总是大于或者等于任何一个子节点的键值<br>每个结点的左子树和右子树都是一个最大堆<br>最小堆的特性如下：</p><p>父结点的键值总是小于或者等于任何一个子节点的键值<br>每个结点的左子树和右子树都是一个最小堆<br>二、算法思想<br>1.最大堆的算法思想是：<br>先将初始的R[0…n-1]建立成最大堆，此时是无序堆，而堆顶是最大元素<br>再将堆顶R[0]和无序区的最后一个记录R[n-1]交换，由此得到新的无序区R[0…n-2]和有序区R[n-1]，且满足R[0…n-2].keys ≤ R[n-1].key<br>由于交换后，前R[0…n-2]可能不满足最大堆的性质，因此再调整前R[0…n-2]为最大堆，直到只有R[0]最后一个元素才调整完成。<br>最大堆排序完成后，其实是升序序列，每次调整堆都是要得到最大的一个元素，然后与当前堆的最后一个元素交换，因此最后所得到的序列是升序序列。<br>2.最小堆的算法思想是：<br>先将初始的R[0…n-1]建立成最小堆，此时是无序堆，而堆顶元素是最小的元素<br>再将堆顶R[0]与无序区的最后一个R[n-1]交换，由此得到新的无序堆R[0…n-2]和有序堆R[n-1]，且满足R[0…n-2].keys &gt;= R[n-1].key<br>由于交换后，前R[0…n-2]可能不满足最小堆的性质，因此再调整前R[0…n-2]为最小堆，直到只有R[0]最后一个元素才调整完成<br>最小堆排序完成后，其实是降序序列，每次调整堆都是要得到最小的一个元素，然后与当前无序堆的最后一个元素交换，所以所得到的序列是降序的。<br>提示：堆排序的过程，其实就是不断地扩大有序区，然后不断地缩小无序区，直到只有有序区的过程。</p><p>三、排序过程分析<br>因为算法比较抽象，这里直接通过举个小例子来说明堆排序的过程是如何的。下面我们用这个无序序列采用最大堆的进行堆排序，所得到的序列就是升序序列（ASC）。<br>无序序列：89,-7,999,-89,7,0,-888,7,-7<br>第一步：初始化建成最大堆：<br><img src="\堆排序\dui1.png" alt="图片"></p><p>第二步：将堆顶最大元素999与无序区的最后一个元素交换，使999成为有序区。交换后，-7成为堆顶，由于-7并不是无序区中最大的元素，因此需要调整无序区，使无序区中最大值89成为堆顶，所以-7与89交换。交换后导致89的右子树不满足最大堆的性质，因此要对右子树调整成最大堆，所以-7要与0交换，如下图：<br><img src="\堆排序\dui2.jpg" alt="图片"></p><p>从图中看到，当-7成89交换后，堆顶是最大元素了，但是-7的左孩子是0，右孩子是-888，由于-7&lt;0，导致-7这个结点不满足堆的性质，因此需要调整它。所以，0与-7交换。<br>然后不断重复着第二步的过程，直到全部成为有序区。<br>最后：所得到的是升序序列</p><p><img src="\堆排序\dui3.jpg" alt="图片"></p><p>四、时间复杂度<br>堆排序的时间，主要由建立初始堆和反复调整堆这两部分的时间开销构成.由于堆排序是不稳定的，它得扭到的时间复杂度会根据实际情况较大，因此只能取平均时间复杂度。<br>平均时间复杂度为：O( N <em> log2(N) )<br>堆排序耗时的操作有：初始堆 + 反复调整堆，时间复杂度如下：<br>1.初始建堆：每个父节点会和左右子节点进行最多2次比较和1次交换，所以复杂度跟父节点个数有关。根据2x &lt;= n（x为n个元素可以折半的次数，也就是父节点个数），得出x = log2n。即O ( log2n )<br>2.反复调整堆：由于初始化堆过程中，会记录数组比较结果，所以堆排序对原序列的数组顺序并不敏感，最好情况和最坏情况差不多。需要抽取 n-1 次堆顶元素，每次取堆顶元素都需要重建堆（O(重建堆) &lt; O(初始堆)）。所以小于 O(n-1) </em> O(log2n)<br>使用建议：<br>由于初始化堆需要比较的次数较多，因此，堆排序比较适合于数据量非常大的场合（百万数据或更多）。由于高效的快速排序是基于递归实现的，所以在数据量非常大时会发生堆栈溢出错误。</p><p>五、Java示例代码</p><p>public class HeapSort{<br> private static int[] sort=new int[]{1,0,10,20,3,5,6,4,9,8,12,<br>   17,34,11};</p><p> public static void main(String[] args){<br>  buildMaxHeapify(sort);<br>  heapSort(sort);<br>  print(sort);<br> }</p><p> private static void buildMaxHeapify(int[] data){<br>//没有子节点的才需要创建最大堆，从最后一个的父节点开始<br>  int startIndex=getParentIndex(data.length-1);<br>//从尾端开始创建最大堆，每次都是正确的堆<br>  for(int i=startIndex;i&gt;=0;i–){<br>   maxHeapify(data,data.length,i);<br>  }<br> }</p><p> /*<em>  </em>创建最大堆<br>  <em>  </em>@paramdata<br>  <em>@paramheapSize需要创建最大堆的大小，一般在sort的时候用到，因为最多值放在末尾，末尾就不再归入最大堆了  </em>@paramindex当前需要创建最大堆的位置<br>  */<br> private static void maxHeapify(int[] data,int heapSize,int index){<br>//当前点与左右子节点比较<br>  int left=getChildLeftIndex(index);<br>  int right=getChildRightIndex(index);</p><p>  int largest=index;<br>  if(left&lt;heapSize&amp;&amp;data[index]&lt;data[left]){<br>   largest=left;<br>  }<br>  if(right&lt;heapSize&amp;&amp;data[largest]&lt;data[right]){<br>   largest=right;<br>  }<br>//得到最大值后可能需要交换，如果交换了，其子节点可能就不是最大堆了，需要重新调整<br>  if(largest!=index){<br>   int temp=data[index];<br>   data[index]=data[largest];<br>   data[largest]=temp;<br>   maxHeapify(data,heapSize,largest);<br>  }<br> }</p><p> /*<em>  </em>排序，最大值放在末尾，data虽然是最大堆，在排序后就成了递增的<br>  <em>  </em>@paramdata<br>  */<br> private static void heapSort(int[] data){<br>//末尾与头交换，交换后调整最大堆<br>  for(int i=data.length-1;i&gt;0;i–){<br>   int temp=data[0];<br>   data[0]=data[i];<br>   data[i]=temp;<br>   maxHeapify(data,i,0);<br>  }<br> }</p><p> /*<em>  </em>父节点位置<br>  <em>  </em>@paramcurrent<br>  <em>@return  </em>/<br> private static int getParentIndex(int current){<br>  return(current-1)&gt;&gt;1;<br> }</p><p> /*<em>  </em>左子节点position注意括号，加法优先级更高<br>  <em>  </em>@paramcurrent<br>  <em>@return  </em>/<br> private static int getChildLeftIndex(int current){<br>  return(current&lt;&lt;1)+1;<br> }</p><p> /*<em>  </em>右子节点position<br>  <em>  </em>@paramcurrent<br>  <em>@return  </em>/<br> private static int getChildRightIndex(int current){<br>  return(current&lt;&lt;1)+2;<br> }</p><p> private static void print(int[] data){<br>  int pre=-2;<br>  for(int i=0;i&lt;data.length;i++){<br>   if(pre&lt;(int)getLog(i+1)){<br>    pre=(int)getLog(i+1);<br>    System.out.println();<br>   }<br>   System.out.print(data[i]+”|”);<br>  }<br> }</p><p> /*<em>  </em>以2为底的对数<br>  <em>  </em>@paramparam<br>  <em>@return  </em>/<br> private static double getLog(double param){<br>  return Math.log(param)/Math.log(2);<br> }<br>}</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;一、基础知识&lt;br&gt;我们通常所说的堆是指二叉堆，二叉堆又称完全二叉树或者叫近似完全二叉树。二叉堆又分为最大堆和最小堆。&lt;br&gt;堆排序(Heapsort)是指利用堆这种数据结构所设计的一种排序算法，它是选择排序的一种。可以利用数组的特点快速定位指定索引的元素。数组可以根据索引
+      
+    
+    </summary>
+    
+      <category term="基础知识" scheme="http://ruanlz.github.io/categories/%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/"/>
+    
+      <category term="算法排序" scheme="http://ruanlz.github.io/categories/%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/%E7%AE%97%E6%B3%95%E6%8E%92%E5%BA%8F/"/>
+    
+    
+      <category term="算法排序" scheme="http://ruanlz.github.io/tags/%E7%AE%97%E6%B3%95%E6%8E%92%E5%BA%8F/"/>
+    
+      <category term="基础知识" scheme="http://ruanlz.github.io/tags/%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>计数排序</title>
+    <link href="http://ruanlz.github.io/2018/04/16/%E8%AE%A1%E6%95%B0%E6%8E%92%E5%BA%8F/"/>
+    <id>http://ruanlz.github.io/2018/04/16/计数排序/</id>
+    <published>2018-04-16T15:20:40.000Z</published>
+    <updated>2018-04-26T14:20:25.795Z</updated>
+    
+    <content type="html"><![CDATA[<p>计数排序用到一个额外的计数数组C，根据数组C来将原数组A中的元素排到正确的位置。<br>通俗地理解，例如有10个年龄不同的人，假如统计出有8个人的年龄不比小明大（即小于等于小明的年龄，这里也包括了小明），那么小明的年龄就排在第8位，通过这种思想可以确定每个人的位置，也就排好了序。当然，年龄一样时需要特殊处理（保证稳定性）：通过反向填充目标数组，填充完毕后将对应的数字统计递减，可以确保计数排序的稳定性。<br>计数排序的步骤如下：</p><pre><code>1. 统计数组A中每个值A[i]出现的次数，存入C[A[i]]2. 从前向后，使数组C中的每个值等于其与前一项相加，这样数组C[A[i]]就变成了代表数组A中小于等于A[i]的元素个数3. 反向填充目标数组B：将数组元素A[i]放在数组B的第C[A[i]]个位置（下标为C[A[i]] - 1），每放一个元素就将C[A[i]]递减</code></pre><p>计数排序的实现代码如下：</p><p>#include<iostream><br>using namespace std;<br>// 分类 ———— 内部非比较排序<br>// 数据结构 ——— 数组<br>// 最差时间复杂度 —- O(n + k)<br>// 最优时间复杂度 —- O(n + k)<br>// 平均时间复杂度 —- O(n + k)<br>// 所需辅助空间 —— O(n + k)<br>// 稳定性 ———– 稳定<br>const int k = 100;   // 基数为100，排序[0,99]内的整数<br>int C[k];            // 计数数组<br>void CountingSort(int A[], int n)<br>{<br>    for (int i = 0; i &lt; k; i++)   // 初始化，将数组C中的元素置0(此步骤可省略，整型数组元素默认值为0)<br>    {<br>        C[i] = 0;<br>    }<br>    for (int i = 0; i &lt; n; i++)   // 使C[i]保存着等于i的元素个数<br>    {<br>        C[A[i]]++;<br>    }<br>    for (int i = 1; i &lt; k; i++)   // 使C[i]保存着小于等于i的元素个数，排序后元素i就放在第C[i]个输出位置上<br>    {<br>        C[i] = C[i] + C[i - 1];<br>    }<br>    int <em>B = (int </em>)malloc((n) * sizeof(int));// 分配临时空间,长度为n，用来暂存中间数据<br>    for (int i = n - 1; i &gt;= 0; i–)    // 从后向前扫描保证计数排序的稳定性(重复元素相对次序不变)<br>    {<br>        B[–C[A[i]]] = A[i];      // 把每个元素A[i]放到它在输出数组B中的正确位置上<br>                                  // 当再遇到重复元素时会被放在当前元素的前一个位置上保证计数排序的稳定性<br>    }<br>    for (int i = 0; i &lt; n; i++)   // 把临时空间B中的数据拷贝回A<br>    {<br>        A[i] = B[i];<br>    }<br>    free(B);    // 释放临时空间<br>}<br>int main()<br>{<br>    int A[] = { 15, 22, 19, 46, 27, 73, 1, 19, 8 };  // 针对计数排序设计的输入，每一个元素都在[0,100]上且有重复元素<br>    int n = sizeof(A) / sizeof(int);<br>    CountingSort(A, n);<br>    printf(“计数排序结果：”);<br>    for (int i = 0; i &lt; n; i++)<br>    {<br>        printf(“%d “, A[i]);<br>    }<br>    printf(“\n”);<br>    return 0;<br>}</iostream></p><p>下图给出了对{ 4, 1, 3, 4, 3 }进行计数排序的简单演示过程</p><p>计数排序的时间复杂度和空间复杂度与数组A的数据范围（A中元素的最大值与最小值的差加上1）有关，因此对于数据范围很大的数组，计数排序需要大量时间和内存。<br>例如：对0到99之间的数字进行排序，计数排序是最好的算法，然而计数排序并不适合按字母顺序排序人名，将计数排序用在基数排序算法中，能够更有效的排序数据范围很大的数组。</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;计数排序用到一个额外的计数数组C，根据数组C来将原数组A中的元素排到正确的位置。&lt;br&gt;通俗地理解，例如有10个年龄不同的人，假如统计出有8个人的年龄不比小明大（即小于等于小明的年龄，这里也包括了小明），那么小明的年龄就排在第8位，通过这种思想可以确定每个人的位置，也就排好
+      
+    
+    </summary>
+    
+      <category term="基础知识" scheme="http://ruanlz.github.io/categories/%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/"/>
+    
+      <category term="算法排序" scheme="http://ruanlz.github.io/categories/%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/%E7%AE%97%E6%B3%95%E6%8E%92%E5%BA%8F/"/>
+    
+    
+      <category term="算法排序" scheme="http://ruanlz.github.io/tags/%E7%AE%97%E6%B3%95%E6%8E%92%E5%BA%8F/"/>
+    
+      <category term="基础知识" scheme="http://ruanlz.github.io/tags/%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>快速排序</title>
+    <link href="http://ruanlz.github.io/2018/04/16/%E5%BF%AB%E9%80%9F%E6%8E%92%E5%BA%8F/"/>
+    <id>http://ruanlz.github.io/2018/04/16/快速排序/</id>
+    <published>2018-04-16T15:20:40.000Z</published>
+    <updated>2018-04-26T14:20:25.796Z</updated>
+    
+    <content type="html"><![CDATA[<p>快速排序是由东尼·霍尔所发展的一种排序算法。在平均状况下，排序n个元素要O(nlogn)次比较。在最坏状况下则需要O(n^2)次比较，但这种状况并不常见。事实上，快速排序通常明显比其他O(nlogn)算法更快，因为它的内部循环可以在大部分的架构上很有效率地被实现出来。<br>快速排序使用分治策略(Divide and Conquer)来把一个序列分为两个子序列。步骤为：</p><pre><code>1. 从序列中挑出一个元素，作为&quot;基准&quot;(pivot).2. 把所有比基准值小的元素放在基准前面，所有比基准值大的元素放在基准的后面（相同的数可以到任一边），这个称为分区(partition)操作。3. 对每个分区递归地进行步骤1~2，递归的结束条件是序列的大小是0或1，这时整体已经被排好序了。</code></pre><p>快速排序的代码如下：</p><p>#include &lt;stdio.h&gt;<br>// 分类 ———— 内部比较排序<br>// 数据结构 ——— 数组<br>// 最差时间复杂度 —- 每次选取的基准都是最大（或最小）的元素，导致每次只划分出了一个分区，需要进行n-1次划分才能结束递归，时间复杂度为O(n^2)<br>// 最优时间复杂度 —- 每次选取的基准都是中位数，这样每次都均匀的划分出两个分区，只需要logn次划分就能结束递归，时间复杂度为O(nlogn)<br>// 平均时间复杂度 —- O(nlogn)<br>// 所需辅助空间 —— 主要是递归造成的栈空间的使用(用来保存left和right等局部变量)，取决于递归树的深度，一般为O(logn)，最差为O(n)<br>// 稳定性 ———- 不稳定<br>void Swap(int A[], int i, int j)<br>{<br>    int temp = A[i];<br>    A[i] = A[j];<br>    A[j] = temp;<br>}<br>int Partition(int A[], int left, int right)  // 划分函数<br>{<br>    int pivot = A[right];               // 这里每次都选择最后一个元素作为基准<br>    int tail = left - 1;                // tail为小于基准的子数组最后一个元素的索引<br>    for (int i = left; i &lt; right; i++)  // 遍历基准以外的其他元素<br>    {<br>        if (A[i] &lt;= pivot)              // 把小于等于基准的元素放到前一个子数组末尾<br>        {<br>            Swap(A, ++tail, i);<br>        }<br>    }<br>    Swap(A, tail + 1, right);           // 最后把基准放到前一个子数组的后边，剩下的子数组既是大于基准的子数组<br>                                        // 该操作很有可能把后面元素的稳定性打乱，所以快速排序是不稳定的排序算法<br>    return tail + 1;                    // 返回基准的索引<br>}<br>void QuickSort(int A[], int left, int right)<br>{<br>    if (left &gt;= right)<br>        return;<br>    int pivot_index = Partition(A, left, right); // 基准的索引<br>    QuickSort(A, left, pivot_index - 1);<br>    QuickSort(A, pivot_index + 1, right);<br>}<br>int main()<br>{<br>    int A[] = { 5, 2, 9, 4, 7, 6, 1, 3, 8 }; // 从小到大快速排序<br>    int n = sizeof(A) / sizeof(int);<br>    QuickSort(A, 0, n - 1);<br>    printf(“快速排序结果：”);<br>    for (int i = 0; i &lt; n; i++)<br>    {<br>        printf(“%d “, A[i]);<br>    }<br>    printf(“\n”);<br>    return 0;<br>}</p><p>使用快速排序法对一列数字进行排序的过程：</p><p>快速排序是不稳定的排序算法，不稳定发生在基准元素与A[tail+1]交换的时刻。<br>比如序列：{ 1, 3, 4, 2, 8, 9, 8, 7, 5 }，基准元素是5，一次划分操作后5要和第一个8进行交换，从而改变了两个元素8的相对次序。</p><p>Java系统提供的Arrays.sort函数。对于基础类型，底层使用快速排序。对于非基础类型，底层使用归并排序。请问是为什么？<br>答：这是考虑到排序算法的稳定性。对于基础类型，相同值是无差别的，排序前后相同值的相对位置并不重要，所以选择更为高效的快速排序，尽管它是不稳定的排序算法；而对于非基础类型，排序前后相等实例的相对位置不宜改变，所以选择稳定的归并排序。 </p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;快速排序是由东尼·霍尔所发展的一种排序算法。在平均状况下，排序n个元素要O(nlogn)次比较。在最坏状况下则需要O(n^2)次比较，但这种状况并不常见。事实上，快速排序通常明显比其他O(nlogn)算法更快，因为它的内部循环可以在大部分的架构上很有效率地被实现出来。&lt;br
+      
+    
+    </summary>
+    
+      <category term="基础知识" scheme="http://ruanlz.github.io/categories/%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/"/>
+    
+      <category term="算法排序" scheme="http://ruanlz.github.io/categories/%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/%E7%AE%97%E6%B3%95%E6%8E%92%E5%BA%8F/"/>
+    
+    
+      <category term="算法排序" scheme="http://ruanlz.github.io/tags/%E7%AE%97%E6%B3%95%E6%8E%92%E5%BA%8F/"/>
+    
+      <category term="基础知识" scheme="http://ruanlz.github.io/tags/%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>插入排序</title>
+    <link href="http://ruanlz.github.io/2018/04/16/%E6%8F%92%E5%85%A5%E6%8E%92%E5%BA%8F/"/>
+    <id>http://ruanlz.github.io/2018/04/16/插入排序/</id>
+    <published>2018-04-16T15:20:40.000Z</published>
+    <updated>2018-04-26T14:20:25.792Z</updated>
+    
+    <content type="html"><![CDATA[<p>插入排序是一种简单直观的排序算法。它的工作原理非常类似于我们抓扑克牌</p><p>对于未排序数据(右手抓到的牌)，在已排序序列(左手已经排好序的手牌)中从后向前扫描，找到相应位置并插入。<br>插入排序在实现上，通常采用in-place排序（即只需用到O(1)的额外空间的排序），因而在从后向前扫描过程中，需要反复把已排序元素逐步向后挪位，为最新元素提供插入空间。<br>具体算法描述如下：</p><pre><code>1. 从第一个元素开始，该元素可以认为已经被排序2. 取出下一个元素，在已经排序的元素序列中从后向前扫描3. 如果该元素（已排序）大于新元素，将该元素移到下一位置4. 重复步骤3，直到找到已排序的元素小于或者等于新元素的位置5. 将新元素插入到该位置后6. 重复步骤2~5</code></pre><p>插入排序的代码如下：</p><p>#include &lt;stdio.h&gt;<br>// 分类 ————- 内部比较排序<br>// 数据结构 ———- 数组<br>// 最差时间复杂度 —- 最坏情况为输入序列是降序排列的,此时时间复杂度O(n^2)<br>// 最优时间复杂度 —- 最好情况为输入序列是升序排列的,此时时间复杂度O(n)<br>// 平均时间复杂度 —- O(n^2)<br>// 所需辅助空间 —— O(1)<br>// 稳定性 ———— 稳定<br>void InsertionSort(int A[], int n)<br>{<br>    for (int i = 1; i &lt; n; i++)         // 类似抓扑克牌排序<br>    {<br>        int get = A[i];                 // 右手抓到一张扑克牌<br>        int j = i - 1;                  // 拿在左手上的牌总是排序好的<br>        while (j &gt;= 0 &amp;&amp; A[j] &gt; get)    // 将抓到的牌与手牌从右向左进行比较<br>        {<br>            A[j + 1] = A[j];            // 如果该手牌比抓到的牌大，就将其右移<br>            j–;<br>        }<br>        A[j + 1] = get; // 直到该手牌比抓到的牌小(或二者相等)，将抓到的牌插入到该手牌右边(相等元素的相对次序未变，所以插入排序是稳定的)<br>    }<br>}<br>int main()<br>{<br>    int A[] = { 6, 5, 3, 1, 8, 7, 2, 4 };// 从小到大插入排序<br>    int n = sizeof(A) / sizeof(int);<br>    InsertionSort(A, n);<br>    printf(“插入排序结果：”);<br>    for (int i = 0; i &lt; n; i++)<br>    {<br>        printf(“%d “, A[i]);<br>    }<br>    printf(“\n”);<br>    return 0;<br>}</p><p> 　　上述代码对序列{ 6, 5, 3, 1, 8, 7, 2, 4 }进行插入排序的实现过程如下</p><p>使用插入排序为一列数字进行排序的宏观过程：</p><p>插入排序不适合对于数据量比较大的排序应用。但是，如果需要排序的数据量很小，比如量级小于千，那么插入排序还是一个不错的选择。 插入排序在工业级库中也有着广泛的应用，在STL的sort算法和stdlib的qsort算法中，都将插入排序作为快速排序的补充，用于少量元素的排序（通常为8个或以下）。</p><p>插入排序的改进：二分插入排序</p><p>对于插入排序，如果比较操作的代价比交换操作大的话，可以采用二分查找法来减少比较操作的次数，我们称为二分插入排序，代码如下：</p><p>#include &lt;stdio.h&gt;<br>// 分类 ————– 内部比较排序<br>// 数据结构 ———- 数组<br>// 最差时间复杂度 —- O(n^2)<br>// 最优时间复杂度 —- O(nlogn)<br>// 平均时间复杂度 —- O(n^2)<br>// 所需辅助空间 —— O(1)<br>// 稳定性 ———— 稳定<br>void InsertionSortDichotomy(int A[], int n)<br>{<br>    for (int i = 1; i &lt; n; i++)<br>    {<br>        int get = A[i];                    // 右手抓到一张扑克牌<br>        int left = 0;                    // 拿在左手上的牌总是排序好的，所以可以用二分法<br>        int right = i - 1;                // 手牌左右边界进行初始化<br>        while (left &lt;= right)            // 采用二分法定位新牌的位置<br>        {<br>            int mid = (left + right) / 2;<br>            if (A[mid] &gt; get)<br>                right = mid - 1;<br>            else<br>                left = mid + 1;<br>        }<br>        for (int j = i - 1; j &gt;= left; j–)    // 将欲插入新牌位置右边的牌整体向右移动一个单位<br>        {<br>            A[j + 1] = A[j];<br>        }<br>        A[left] = get;                    // 将抓到的牌插入手牌<br>    }<br>}<br>int main()<br>{<br>    int A[] = { 5, 2, 9, 4, 7, 6, 1, 3, 8 };// 从小到大二分插入排序<br>    int n = sizeof(A) / sizeof(int);<br>    InsertionSortDichotomy(A, n);<br>    printf(“二分插入排序结果：”);<br>    for (int i = 0; i &lt; n; i++)<br>    {<br>        printf(“%d “, A[i]);<br>    }<br>    printf(“\n”);<br>    return 0;<br>}</p><p>当n较大时，二分插入排序的比较次数比直接插入排序的最差情况好得多，但比直接插入排序的最好情况要差，所当以元素初始序列已经接近升序时，直接插入排序比二分插入排序比较次数少。二分插入排序元素移动次数与直接插入排序相同，依赖于元素初始序列。</p><p>插入排序的更高效改进：希尔排序(Shell Sort)</p><p>希尔排序，也叫递减增量排序，是插入排序的一种更高效的改进版本。希尔排序是不稳定的排序算法。<br>希尔排序是基于插入排序的以下两点性质而提出改进方法的：<br>        • 插入排序在对几乎已经排好序的数据操作时，效率高，即可以达到线性排序的效率<br>        • 但插入排序一般来说是低效的，因为插入排序每次只能将数据移动一位<br>希尔排序通过将比较的全部元素分为几个区域来提升插入排序的性能。这样可以让一个元素可以一次性地朝最终位置前进一大步。然后算法再取越来越小的步长进行排序，算法的最后一步就是普通的插入排序，但是到了这步，需排序的数据几乎是已排好的了（此时插入排序较快）。<br>假设有一个很小的数据在一个已按升序排好序的数组的末端。如果用复杂度为O(n^2)的排序（冒泡排序或直接插入排序），可能会进行n次的比较和交换才能将该数据移至正确位置。而希尔排序会用较大的步长移动数据，所以小数据只需进行少数比较和交换即可到正确位置。<br>希尔排序的代码如下：</p><p>#include &lt;stdio.h&gt;<br>// 分类 ————– 内部比较排序<br>// 数据结构 ———- 数组<br>// 最差时间复杂度 —- 根据步长序列的不同而不同。已知最好的为O(n(logn)^2)<br>// 最优时间复杂度 —- O(n)<br>// 平均时间复杂度 —- 根据步长序列的不同而不同。<br>// 所需辅助空间 —— O(1)<br>// 稳定性 ———— 不稳定<br>void ShellSort(int A[], int n)<br>{<br>    int h = 0;<br>    while (h &lt;= n)                          // 生成初始增量<br>    {<br>        h = 3 * h + 1;<br>    }<br>    while (h &gt;= 1)<br>    {<br>        for (int i = h; i &lt; n; i++)<br>        {<br>            int j = i - h;<br>            int get = A[i];<br>            while (j &gt;= 0 &amp;&amp; A[j] &gt; get)<br>            {<br>                A[j + h] = A[j];<br>                j = j - h;<br>            }<br>            A[j + h] = get;<br>        }<br>        h = (h - 1) / 3;                    // 递减增量<br>    }<br>}<br>int main()<br>{<br>    int A[] = { 5, 2, 9, 4, 7, 6, 1, 3, 8 };// 从小到大希尔排序<br>    int n = sizeof(A) / sizeof(int);<br>    ShellSort(A, n);<br>    printf(“希尔排序结果：”);<br>    for (int i = 0; i &lt; n; i++)<br>    {<br>        printf(“%d “, A[i]);<br>    }<br>    printf(“\n”);<br>    return 0;<br>}</p><p>以23, 10, 4, 1的步长序列进行希尔排序：</p><p>希尔排序是不稳定的排序算法，虽然一次插入排序是稳定的，不会改变相同元素的相对顺序，但在不同的插入排序过程中，相同的元素可能在各自的插入排序中移动，最后其稳定性就会被打乱。<br>比如序列：{ 3, 5, 10, 8, 7, 2, 8, 1, 20, 6 }，h=2时分成两个子序列 { 3, 10, 7, 8, 20 } 和  { 5, 8, 2, 1, 6 } ，未排序之前第二个子序列中的8在前面，现在对两个子序列进行插入排序，得到 { 3, 7, 8, 10, 20 } 和 { 1, 2, 5, 6, 8 } ，即 { 3, 1, 7, 2, 8, 5, 10, 6, 20, 8 } ，两个8的相对次序发生了改变。</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;插入排序是一种简单直观的排序算法。它的工作原理非常类似于我们抓扑克牌&lt;/p&gt;
+&lt;p&gt;对于未排序数据(右手抓到的牌)，在已排序序列(左手已经排好序的手牌)中从后向前扫描，找到相应位置并插入。&lt;br&gt;插入排序在实现上，通常采用in-place排序（即只需用到O(1)的额外空间的
+      
+    
+    </summary>
+    
+      <category term="基础知识" scheme="http://ruanlz.github.io/categories/%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/"/>
+    
+      <category term="算法排序" scheme="http://ruanlz.github.io/categories/%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/%E7%AE%97%E6%B3%95%E6%8E%92%E5%BA%8F/"/>
+    
+    
+      <category term="算法排序" scheme="http://ruanlz.github.io/tags/%E7%AE%97%E6%B3%95%E6%8E%92%E5%BA%8F/"/>
+    
+      <category term="基础知识" scheme="http://ruanlz.github.io/tags/%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>桶排序</title>
+    <link href="http://ruanlz.github.io/2018/04/16/%E6%A1%B6%E6%8E%92%E5%BA%8F/"/>
+    <id>http://ruanlz.github.io/2018/04/16/桶排序/</id>
+    <published>2018-04-16T15:20:40.000Z</published>
+    <updated>2018-04-26T14:20:25.799Z</updated>
+    
+    <content type="html"><![CDATA[<p>桶排序也叫箱排序。工作的原理是将数组元素映射到有限数量个桶里，利用计数排序可以定位桶的边界，每个桶再各自进行桶内排序（使用其它排序算法或以递归方式继续使用桶排序）。<br>桶排序的实现代码如下：</p><p>#include<iostream><br>using namespace std;<br>// 分类 ————- 内部非比较排序<br>// 数据结构 ——— 数组<br>// 最差时间复杂度 —- O(nlogn)或O(n^2)，只有一个桶，取决于桶内排序方式<br>// 最优时间复杂度 —- O(n)，每个元素占一个桶<br>// 平均时间复杂度 —- O(n)，保证各个桶内元素个数均匀即可<br>// 所需辅助空间 —— O(n + bn)<br>// 稳定性 ———– 稳定<br>/<em> 本程序用数组模拟桶 </em>/<br>const int bn = 5;    // 这里排序[0,49]的元素，使用5个桶就够了，也可以根据输入动态确定桶的数量<br>int C[bn];           // 计数数组，存放桶的边界信息<br>void InsertionSort(int A[], int left, int right)<br>{<br>    for (int i = left + 1; i &lt;= right; i++)  // 从第二张牌开始抓，直到最后一张牌<br>    {<br>        int get = A[i];<br>        int j = i - 1;<br>        while (j &gt;= left &amp;&amp; A[j] &gt; get)<br>        {<br>            A[j + 1] = A[j];<br>            j–;<br>        }<br>        A[j + 1] = get;<br>    }<br>}<br>int MapToBucket(int x)<br>{<br>    return x / 10;    // 映射函数f(x)，作用相当于快排中的Partition，把大量数据分割成基本有序的数据块<br>}<br>void CountingSort(int A[], int n)<br>{<br>    for (int i = 0; i &lt; bn; i++)<br>    {<br>        C[i] = 0;<br>    }<br>    for (int i = 0; i &lt; n; i++)     // 使C[i]保存着i号桶中元素的个数<br>    {<br>        C[MapToBucket(A[i])]++;<br>    }<br>    for (int i = 1; i &lt; bn; i++)    // 定位桶边界：初始时，C[i]-1为i号桶最后一个元素的位置<br>    {<br>        C[i] = C[i] + C[i - 1];<br>    }<br>    int <em>B = (int </em>)malloc((n) * sizeof(int));<br>    for (int i = n - 1; i &gt;= 0; i–)// 从后向前扫描保证计数排序的稳定性(重复元素相对次序不变)<br>    {<br>        int b = MapToBucket(A[i]);  // 元素A[i]位于b号桶<br>        B[–C[b]] = A[i];           // 把每个元素A[i]放到它在输出数组B中的正确位置上<br>                                    // 桶的边界被更新：C[b]为b号桶第一个元素的位置<br>    }<br>    for (int i = 0; i &lt; n; i++)<br>    {<br>        A[i] = B[i];<br>    }<br>    free(B);<br>}<br>void BucketSort(int A[], int n)<br>{<br>    CountingSort(A, n);          // 利用计数排序确定各个桶的边界（分桶）<br>    for (int i = 0; i &lt; bn; i++) // 对每一个桶中的元素应用插入排序<br>    {<br>        int left = C[i];         // C[i]为i号桶第一个元素的位置<br>        int right = (i == bn - 1 ? n - 1 : C[i + 1] - 1);// C[i+1]-1为i号桶最后一个元素的位置<br>        if (left &lt; right)        // 对元素个数大于1的桶进行桶内插入排序<br>            InsertionSort(A, left, right);<br>    }<br>}<br>int main()<br>{<br>    int A[] = { 29, 25, 3, 49, 9, 37, 21, 43 };// 针对桶排序设计的输入<br>    int n = sizeof(A) / sizeof(int);<br>    BucketSort(A, n);<br>    printf(“桶排序结果：”);<br>    for (int i = 0; i &lt; n; i++)<br>    {<br>        printf(“%d “, A[i]);<br>    }<br>    printf(“\n”);<br>    return 0;<br>}</iostream></p><p> 　　下图给出了对{ 29, 25, 3, 49, 9, 37, 21, 43 }进行桶排序的简单演示过程</p><p>桶排序不是比较排序，不受到O(nlogn)下限的影响，它是鸽巢排序的一种归纳结果，当所要排序的数组值分散均匀的时候，桶排序拥有线性的时间复杂度。</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;桶排序也叫箱排序。工作的原理是将数组元素映射到有限数量个桶里，利用计数排序可以定位桶的边界，每个桶再各自进行桶内排序（使用其它排序算法或以递归方式继续使用桶排序）。&lt;br&gt;桶排序的实现代码如下：&lt;/p&gt;
+&lt;p&gt;#include&lt;iostream&gt;&lt;br&gt;using name
+      
+    
+    </summary>
+    
+      <category term="基础知识" scheme="http://ruanlz.github.io/categories/%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/"/>
+    
+      <category term="算法排序" scheme="http://ruanlz.github.io/categories/%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/%E7%AE%97%E6%B3%95%E6%8E%92%E5%BA%8F/"/>
+    
+    
+      <category term="算法排序" scheme="http://ruanlz.github.io/tags/%E7%AE%97%E6%B3%95%E6%8E%92%E5%BA%8F/"/>
+    
+      <category term="基础知识" scheme="http://ruanlz.github.io/tags/%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>虚拟机安装CentOS教程</title>
+    <link href="http://ruanlz.github.io/2018/04/16/%E8%99%9A%E6%8B%9F%E6%9C%BA%E5%AE%89%E8%A3%85CentOS%E6%95%99%E7%A8%8B/"/>
+    <id>http://ruanlz.github.io/2018/04/16/虚拟机安装CentOS教程/</id>
+    <published>2018-04-16T15:20:40.000Z</published>
+    <updated>2018-04-26T14:14:04.575Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="设置虚拟机参数"><a href="#设置虚拟机参数" class="headerlink" title="设置虚拟机参数"></a>设置虚拟机参数</h1><h2 id="小标题1"><a href="#小标题1" class="headerlink" title="小标题1"></a>小标题1</h2><ol><li><p>打开vmware workstations，<code>文件-&gt;新建虚拟机</code>，出现如下界面，选择<code>自定义（高级）</code>选项，下一步继续：</p><img src="/2018/04/16/虚拟机安装CentOS教程/1.jpg" title="[选择操作系统镜像]"></li><li><p>打开vmware workstations，<code>文件-&gt;新建虚拟机</code>，出现如下界面，选择<code>自定义（高级）</code>选项，下一步继续：</p><img src="/2018/04/16/虚拟机安装CentOS教程/1.jpg" title="[选择操作系统镜像]"></li></ol><h1 id="设置CentOS参数"><a href="#设置CentOS参数" class="headerlink" title="设置CentOS参数"></a>设置CentOS参数</h1><ol><li>打开vmware workstations，<code>文件-&gt;新建虚拟机</code>，出现如下界面，选择<code>自定义（高级）</code>选项，下一步继续：<img src="/2018/04/16/虚拟机安装CentOS教程/1.jpg" title="[选择操作系统镜像]"></li></ol>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h1 id=&quot;设置虚拟机参数&quot;&gt;&lt;a href=&quot;#设置虚拟机参数&quot; class=&quot;headerlink&quot; title=&quot;设置虚拟机参数&quot;&gt;&lt;/a&gt;设置虚拟机参数&lt;/h1&gt;&lt;h2 id=&quot;小标题1&quot;&gt;&lt;a href=&quot;#小标题1&quot; class=&quot;headerlink&quot; titl
+      
+    
+    </summary>
+    
+      <category term="技术分享" scheme="http://ruanlz.github.io/categories/%E6%8A%80%E6%9C%AF%E5%88%86%E4%BA%AB/"/>
+    
+      <category term="工具安装" scheme="http://ruanlz.github.io/categories/%E6%8A%80%E6%9C%AF%E5%88%86%E4%BA%AB/%E5%B7%A5%E5%85%B7%E5%AE%89%E8%A3%85/"/>
+    
+    
+      <category term="工具安装" scheme="http://ruanlz.github.io/tags/%E5%B7%A5%E5%85%B7%E5%AE%89%E8%A3%85/"/>
+    
+      <category term="操作系统" scheme="http://ruanlz.github.io/tags/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>qqqqqqqqqqqggggggggggggqqqqqqqqqqqq</title>
+    <link href="http://ruanlz.github.io/2018/04/16/%E8%99%BDyi/"/>
+    <id>http://ruanlz.github.io/2018/04/16/虽yi/</id>
+    <published>2018-04-16T15:20:40.000Z</published>
+    <updated>2018-04-26T14:20:25.828Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="ggggggggggggggggg"><a href="#ggggggggggggggggg" class="headerlink" title="ggggggggggggggggg"></a>ggggggggggggggggg</h1><h2 id="小标题1"><a href="#小标题1" class="headerlink" title="小标题1"></a>小标题1</h2><ol><li><p>打开vmware workstationsgggggggggggggg，出现如下界面，选择<code>自定义（高级）</code>选项，下一步继续：</p></li><li><p>打开vmware workstations，gggggggggggggg，出现如下界面，选择<code>自定义（高级）</code>选项，下一步继续：</p></li></ol><h1 id="设置CentOS参数"><a href="#设置CentOS参数" class="headerlink" title="设置CentOS参数"></a>设置CentOS参数</h1><ol><li>打开vmware workstations，gggggggggggggggggggggg，出现如下界面，选择<code>自定义（高级）</code>选项，下一步继续：</li></ol>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h1 id=&quot;ggggggggggggggggg&quot;&gt;&lt;a href=&quot;#ggggggggggggggggg&quot; class=&quot;headerlink&quot; title=&quot;ggggggggggggggggg&quot;&gt;&lt;/a&gt;ggggggggggggggggg&lt;/h1&gt;&lt;h2 id=&quot;小标题1&quot;
+      
+    
+    </summary>
+    
+      <category term="技术分享" scheme="http://ruanlz.github.io/categories/%E6%8A%80%E6%9C%AF%E5%88%86%E4%BA%AB/"/>
+    
+      <category term="工具安装" scheme="http://ruanlz.github.io/categories/%E6%8A%80%E6%9C%AF%E5%88%86%E4%BA%AB/%E5%B7%A5%E5%85%B7%E5%AE%89%E8%A3%85/"/>
+    
+    
+      <category term="工具安装" scheme="http://ruanlz.github.io/tags/%E5%B7%A5%E5%85%B7%E5%AE%89%E8%A3%85/"/>
+    
+      <category term="操作系统" scheme="http://ruanlz.github.io/tags/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Markdown语法入门</title>
+    <link href="http://ruanlz.github.io/2018/04/15/Markdown%E8%AF%AD%E6%B3%95%E5%85%A5%E9%97%A8/"/>
+    <id>http://ruanlz.github.io/2018/04/15/Markdown语法入门/</id>
+    <published>2018-04-15T06:53:32.000Z</published>
+    <updated>2018-04-26T14:15:56.395Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="导语："><a href="#导语：" class="headerlink" title="导语："></a>导语：</h1><p>Markdown 是一种可以使用普通文本编辑器编写的标记语言，通过简单的标记语法，它可以使普通文本内容具有一定的格式。</p><p>一.Markdown 官方文档  1111111111111111<br><a href="https://www.appinn.com/markdown/" target="_blank" rel="noopener">Markdown 中文版语法说明</a><br>二.常用的语法规则</p><h1 id="标题"><a href="#标题" class="headerlink" title="标题"></a><strong>标题</strong></h1><p>Markdown中标题如果想定义一个标题，可以在前面加上#(或者用#将标题括起来)。1-6个#分别表示1-6级标题。有的编辑器需要在#和正文之间加一个空格(Atom)，有的编译器不用(MarkdownPad)，为了保持同一建议都加上空格。  </p><p>#标题一  </p><p>#标题一#  </p><p>##标题二<br>显示结果:</p><h1 id="标题一"><a href="#标题一" class="headerlink" title="标题一"></a>标题一</h1><h1 id="标题一-1"><a href="#标题一-1" class="headerlink" title="标题一"></a>标题一</h1><h2 id="标题二"><a href="#标题二" class="headerlink" title="标题二"></a>标题二</h2><h1 id="文本样式"><a href="#文本样式" class="headerlink" title="文本样式"></a><strong>文本样式</strong></h1><p>Markdown支持4中文本样式，分别是：  加粗.斜体.  删除线. 加粗且斜体。<br>| 样式名称 | 样例 | 输出效果 |<br>| :–:   | :—:   | :–: |<br>|加粗|<strong> 加粗 </strong>|<strong>加粗</strong>|<br>|斜体|<em> 斜体 </em>|<em>斜体</em>|<br>|删除线|~~ 删除线~~ |<del>删除线</del> |<br>|加粗并斜体|<strong> _ 加粗并斜体 _ </strong>|<strong><em>加粗并斜体</em></strong>|</p><h1 id="列表"><a href="#列表" class="headerlink" title="列表"></a><strong>列表</strong></h1><p>在Markdown 下，无序列表直接在文字前加 「 - 」 或者 「 * 」 即可，有序列表则直接在文字前加 「1.」「2.」「3.」 。符号要和文字之间加上一个字符的空格。</p><p>无序列表： 在文本前加 「 <em> 」 即可生成一个无序列表。快捷键：control + L （只能生成列表，不能生成子列表）<br>在 「 </em> 」 前加两个空格键或者一个 tab 键就可以产生一个子列表。<br>有序列表： 在文本前加 「字母.」 或 「数字.」 即可生成一个有序列表。<br>注意，当你第一个序号使用什么作为标记的，那么同级别的列表就会自动使用其作为标记。<br>无序列表和有序列表  </p><p>*引用</p><p>只要在文本内容之前加 「 &gt; （大于号）」 即可将文本变成引用文本。快捷键：control + Q</p><p>*图片与链接</p><p>如果只是简单的插入图片和连接，那么非常简单。两者仅仅是一个 「 ! 」 的区别。</p><p>图片<br><img src="链接的地址" alt="图片描述"><br>快捷键：control + shift + I<br><strong> 链接 </strong><br><a href="链接的地址">文本内容</a><br>快捷键：control + shift + L<br>图片和链接  </p><p><em>水平线<br>三个「 - 」或「 </em> 」都可以画出一条水平分割线</p><p>水平线<br>*代码框</p><p>两对「 <code>`</code> 」包裹<br>代码前加四个空格键<br>代码前加一个 tab 键<br>注意，简书上需空一行后，在代码前加四个空格键或者两个 tab 键才可以生成代码框。<br>有点遗憾的是，笔者未能找到让代码显示行数的方法。<br>代码框<br>*表格</p><p>在 Markdown 下制作表格，是非常非常麻烦的一件事——你必须画出来！</p><p>表格<br>*脚注</p><p>脚注总是成对出现的，「 [^1] 」作为标记，可以点击跳至末尾注解。「 [^1]: 」填写注解，不论写在什么位置，都会出现在文章的末尾。</p><p>脚注<br>注释</p><p>注释是给自己看的，预览时也不会出现，当然发布出去别人也不会看见。<br>快捷键：command + /</p><p>注释<br>首行缩进</p><p>关于首行缩进，网上争议很多，而技术本身并没有错，不是吗？<br>在输入法的「全角」模式下，输入两个空格键即可。</p><p>首行缩进<br>引号</p><p>在网页上写文章建议使用直角引号『「」』。</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h1 id=&quot;导语：&quot;&gt;&lt;a href=&quot;#导语：&quot; class=&quot;headerlink&quot; title=&quot;导语：&quot;&gt;&lt;/a&gt;导语：&lt;/h1&gt;&lt;p&gt;Markdown 是一种可以使用普通文本编辑器编写的标记语言，通过简单的标记语法，它可以使普通文本内容具有一定的格式。&lt;/p&gt;
+&lt;p
+      
+    
+    </summary>
+    
+      <category term="技术分享" scheme="http://ruanlz.github.io/categories/%E6%8A%80%E6%9C%AF%E5%88%86%E4%BA%AB/"/>
+    
+      <category term="工具安装" scheme="http://ruanlz.github.io/categories/%E6%8A%80%E6%9C%AF%E5%88%86%E4%BA%AB/%E5%B7%A5%E5%85%B7%E5%AE%89%E8%A3%85/"/>
+    
+    
+      <category term="工具安装" scheme="http://ruanlz.github.io/tags/%E5%B7%A5%E5%85%B7%E5%AE%89%E8%A3%85/"/>
+    
+      <category term="操作系统" scheme="http://ruanlz.github.io/tags/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>JDK安装教程</title>
+    <link href="http://ruanlz.github.io/2018/04/15/JDK%E5%AE%89%E8%A3%85%E6%95%99%E7%A8%8B/"/>
+    <id>http://ruanlz.github.io/2018/04/15/JDK安装教程/</id>
+    <published>2018-04-15T06:53:32.000Z</published>
+    <updated>2018-04-26T15:40:48.318Z</updated>
+    
+    <content type="html"><![CDATA[<p>学习Java，首先得安装JDK(Java Development Kit)，那么下面就说一下如何在Windows和Linux下安装并验证JDK。</p><h1 id="JDK的下载"><a href="#JDK的下载" class="headerlink" title="JDK的下载"></a>JDK的下载</h1><p>JDK的官方下载地址为： <a href="http://www.oracle.com/technetwork/java/javase/downloads/index.html，" target="_blank" rel="noopener">http://www.oracle.com/technetwork/java/javase/downloads/index.html，</a> 请根据需要下载对应操作系统的安装包。</p><blockquote><p>官方下载速度比较慢，因此可以从华为开源镜像站下载，地址为：<a href="https://mirrors.huaweicloud.com/repository/toolkit/java/jdk/" target="_blank" rel="noopener">https://mirrors.huaweicloud.com/repository/toolkit/java/jdk/</a></p></blockquote><h1 id="Windows下安装JDK"><a href="#Windows下安装JDK" class="headerlink" title="Windows下安装JDK"></a>Windows下安装JDK</h1><ol><li>以<code>jdk-8u151</code>为例，双击上一步下载下来的exe文件，默认安装即可。（备注：路径可以选择其他盘符，但是不建议路径中包含中文及特殊字符）</li><li>安装好之后需要设置环境变量，进入到系统环境变量的管理界面：<code>右键计算机图标=&gt;属性=&gt;高级系统设置=&gt;环境变量</code><img src="/2018/04/15/JDK安装教程/windows_install_01.png" title="[设置Windows环境变量]"></li><li><code>新建</code>变量<code>JAVA_HOME</code>，变量值：<code>C:\Program Files\Java\jdk1.8.0_151</code>(地址请根据自身情况进行修改)</li><li><code>编辑</code>变量<code>PATH</code>，在<code>最前边</code>增加：<code>%JAVA_HOME%\bin;%JAVA_HOME%\jre\bin;</code></li><li><code>新建</code>变量<code>CLASSPATH</code>，变量值：<code>.;%JAVA_HOME%\lib\dt.jar;%JAVA_HOME%\lib\tools.jar</code><img src="/2018/04/15/JDK安装教程/windows_install_02.png" title="[设置Windows环境变量]"></li></ol><h1 id="Linux下安装JDK"><a href="#Linux下安装JDK" class="headerlink" title="Linux下安装JDK"></a>Linux下安装JDK</h1><ol><li><p>以<code>jdk-8u151</code>为例，下载JDK后，将压缩包解压至特定的目录，一般解压至/usr/local目录，下载和解压命令可以参考如下命令：</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">wget https://mirrors.huaweicloud.com/repository/toolkit/java/jdk/8u151-b12/jdk-8u151-linux-x64.tar.gz</span><br><span class="line">tar -zxvf -C /usr/local/ jdk-8u151-linux-x64.tar.gz</span><br></pre></td></tr></table></figure></li><li><p>经JDK的路径加入到环境变量中，在命令行中输入<code>vim /etc/profile</code>，编辑文件，在文件末尾增加如下的内容，然后执行<code>source /etc/profile</code>使环境变量生效。</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">export JAVA_HOME=/usr/local/jdk-8u151</span><br><span class="line">export JRE_HOME=/usr/local/jdk-8u151/jre</span><br><span class="line">export CLASS_PATH=.:$JAVA_HOME/lib/dt.jar:$JAVA_HOME/lib/tools.jar:$JRE_HOME/lib</span><br><span class="line">export PATH=$PATH:$JAVA_HOME/bin:$JRE_HOME/bin</span><br></pre></td></tr></table></figure></li></ol><h1 id="JDK的验证"><a href="#JDK的验证" class="headerlink" title="JDK的验证"></a>JDK的验证</h1><p>windows打开<code>CMD</code>命令窗口，Linux打开终端端口，输入<code>java -version</code>命令，如果出现如下提示则Java安装成功。<br><img src="/2018/04/15/JDK安装教程/jave_version.png" title="[Java的验证]"></p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;学习Java，首先得安装JDK(Java Development Kit)，那么下面就说一下如何在Windows和Linux下安装并验证JDK。&lt;/p&gt;
+&lt;h1 id=&quot;JDK的下载&quot;&gt;&lt;a href=&quot;#JDK的下载&quot; class=&quot;headerlink&quot; title=&quot;
+      
+    
+    </summary>
+    
+      <category term="技术分享" scheme="http://ruanlz.github.io/categories/%E6%8A%80%E6%9C%AF%E5%88%86%E4%BA%AB/"/>
+    
+    
+      <category term="Java" scheme="http://ruanlz.github.io/tags/Java/"/>
+    
+  </entry>
+  
+</feed>
