@@ -1,0 +1,4 @@
+[submodule "themes/indigo"]
+	path = themes/indigo
+	branch = card
+	url = https://github.com/yscoder/hexo-theme-indigo.git
