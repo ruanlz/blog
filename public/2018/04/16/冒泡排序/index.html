@@ -1,0 +1,615 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    
+    <title>冒泡排序 | ruanlz&#39;s Blog | 路漫漫其修远兮，吾将上下而求索</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="算法排序,基础知识">
+    <meta name="description" content="1.原理：比较两个相邻的元素，将值大的元素交换至右端。 思路：依次比较相邻的两个数，将小数放在前面，大数放在后面。即在第一趟：首先比较第1个和第2个数，将小数放前，大数放后。然后比较第2个数和第3个数，将小数放前，大数放后，如此继续，直至比较最后两个数，将小数放前，大数放后。重复第一趟步骤，直至全部排序完成。 举例说明：要排序数组：int[] arr={6,3,8,2,9,1};    第一趟排序">
+<meta name="keywords" content="算法排序,基础知识">
+<meta property="og:type" content="article">
+<meta property="og:title" content="冒泡排序">
+<meta property="og:url" content="http://ruanlz.github.io/2018/04/16/冒泡排序/index.html">
+<meta property="og:site_name" content="ruanlz&#39;s Blog">
+<meta property="og:description" content="1.原理：比较两个相邻的元素，将值大的元素交换至右端。 思路：依次比较相邻的两个数，将小数放在前面，大数放在后面。即在第一趟：首先比较第1个和第2个数，将小数放前，大数放后。然后比较第2个数和第3个数，将小数放前，大数放后，如此继续，直至比较最后两个数，将小数放前，大数放后。重复第一趟步骤，直至全部排序完成。 举例说明：要排序数组：int[] arr={6,3,8,2,9,1};    第一趟排序">
+<meta property="og:locale" content="ZH">
+<meta property="og:updated_time" content="2018-04-29T06:42:47.039Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="冒泡排序">
+<meta name="twitter:description" content="1.原理：比较两个相邻的元素，将值大的元素交换至右端。 思路：依次比较相邻的两个数，将小数放在前面，大数放在后面。即在第一趟：首先比较第1个和第2个数，将小数放前，大数放后。然后比较第2个数和第3个数，将小数放前，大数放后，如此继续，直至比较最后两个数，将小数放前，大数放后。重复第一趟步骤，直至全部排序完成。 举例说明：要排序数组：int[] arr={6,3,8,2,9,1};    第一趟排序">
+    
+        <link rel="alternate" type="application/atom+xml" title="ruanlz&#39;s Blog" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="stylesheet" href="//unpkg.com/hexo-site@latest/css/style.css">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">阮新宇</h5>
+          <a href="mailto:1096421257@qq.com" title="1096421257@qq.com" class="mail">1096421257@qq.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                归档
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                标签
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                分类
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/ruanlz" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">冒泡排序</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="Search">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">冒泡排序</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2018-04-16T15:20:40.000Z" itemprop="datePublished" class="page-time">
+  2018-04-16
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/基础知识/">基础知识</a><ul class="article-category-list-child"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/基础知识/算法排序/">算法排序</a></li></ul></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+
+<article id="post-冒泡排序"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">冒泡排序</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2018-04-16 23:20:40" datetime="2018-04-16T15:20:40.000Z"  itemprop="datePublished">2018-04-16</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/基础知识/">基础知识</a><ul class="article-category-list-child"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/基础知识/算法排序/">算法排序</a></li></ul></li></ul>
+
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <pre><code>1.原理：比较两个相邻的元素，将值大的元素交换至右端。
+思路：依次比较相邻的两个数，将小数放在前面，大数放在后面。即在第一趟：首先比较第1个和第2个数，将小数放前，大数放后。然后比较第2个数和第3个数，将小数放前，大数放后，如此继续，直至比较最后两个数，将小数放前，大数放后。重复第一趟步骤，直至全部排序完成。
+举例说明：要排序数组：int[] arr={6,3,8,2,9,1};   
+第一趟排序：
+第一次排序：6和3比较，6大于3，交换位置：  3  6  8  2  9  1
+第二次排序：6和8比较，6小于8，不交换位置：3  6  8  2  9  1
+第三次排序：8和2比较，8大于2，交换位置：  3  6  2  8  9  1
+第四次排序：8和9比较，8小于9，不交换位置：3  6  2  8  9  1
+第五次排序：9和1比较：9大于1，交换位置：  3  6  2  8  1  9
+第一趟总共进行了5次比较， 排序结果：      3  6  2  8  1  9
+---------------------------------------------------------------------
+第二趟排序：
+第一次排序：3和6比较，3小于6，不交换位置：3  6  2  8  1  9
+第二次排序：6和2比较，6大于2，交换位置：  3  2  6  8  1  9
+第三次排序：6和8比较，6大于8，不交换位置：3  2  6  8  1  9
+第四次排序：8和1比较，8大于1，交换位置：  3  2  6  1  8  9
+第二趟总共进行了4次比较， 排序结果：      3  2  6  1  8  9
+---------------------------------------------------------------------
+第三趟排序：
+第一次排序：3和2比较，3大于2，交换位置：  2  3  6  1  8  9
+第二次排序：3和6比较，3小于6，不交换位置：2  3  6  1  8  9
+第三次排序：6和1比较，6大于1，交换位置：  2  3  1  6  8  9
+第二趟总共进行了3次比较， 排序结果：         2  3  1  6  8  9
+---------------------------------------------------------------------
+第四趟排序：
+第一次排序：2和3比较，2小于3，不交换位置：2  3  1  6  8  9
+第二次排序：3和1比较，3大于1，交换位置：  2  1  3  6  8  9
+第二趟总共进行了2次比较， 排序结果：        2  1  3  6  8  9
+---------------------------------------------------------------------
+第五趟排序：
+第一次排序：2和1比较，2大于1，交换位置：  1  2  3  6  8  9
+第二趟总共进行了1次比较， 排序结果：  1  2  3  6  8  9
+---------------------------------------------------------------------
+最终结果：1  2  3  6  8  9
+---------------------------------------------------------------------
+</code></pre><p>2.代码实现<br>    代码实现：<br>    /*</p>
+<pre><code> * 冒泡排序
+ */
+public class BubbleSort {
+　　public static void  BubbleSort1(int[] arr){　　　
+
+        int i = 0, j = 0;
+        Int size=arr.length;
+
+        for (i = 0; i &lt; size - 1; i++)//一共要排序size-1次
+        {
+            for (j = 0; j &lt; size - 1 - i; j++)//选出该趟排序的最大值往后移动
+            {
+                if (arr[j] &gt; arr[j + 1])
+                {
+                    int tmp = arr[j];
+                    arr[j] = arr[j + 1];
+                    arr[j + 1] = tmp;
+                }
+            }
+        }
+　　}
+ }
+</code></pre><p>3、算法分析<br>（1）算法的最好时间复杂度<br>    　若文件的初始状态是正序的，一趟扫描即可完成排序。所需的关键字比较次数C和记录移动次数M均达到最小值：<br>        C(min)=n-1<br>        M(min)=0。<br>    　冒泡排序最好的时间复杂度为O(n)。</p>
+<p>（2）算法的最坏时间复杂度<br>    　若初始文件是反序的，需要进行n-1趟排序。每趟排序要进行n-i次关键字的比较(1≤i≤n-1)，且每次比较都必须移动记录三次来达到交换记录位置。在这种情况下，比较和移动次数均达到最大值：<br>        C(max)=n(n-1)/2=O(n^2)<br>        M(max)=3n(n-1)/2=O(n^2)<br>    　冒泡排序的最坏时间复杂度为O(n^2)。</p>
+<p>（3）算法的平均时间复杂度为O(n^2)<br>    　虽然冒泡排序不一定要进行n-1趟，但由于它的记录移动次数较多，故平均时间性能比直接插入排序要差得多。</p>
+<p>（4）算法稳定性<br>    　冒泡排序是就地排序，且它是稳定的。<br>4.优化1（优化外层循环）：<br>    　若在某一趟排序中未发现气泡位置的交换，则说明待排序的无序区中所有气泡均满足轻者在上，重者在下的原则，因此，冒泡排序过程可在此趟排序后终止。为此，在下面给出的算法中，引入一个标签flag，在每趟排序开始前，先将其置为0。若排序过程中发生了交换，则将其置为1。各趟排序结束时检查flag，若未曾发生过交换则终止算法，不再进行下一趟排序。</p>
+<p>具体算法：</p>
+<ol>
+<li>//冒泡排序优化1  </li>
+<li>void BubbleSort2(int[] arr)  </li>
+<li>{  </li>
+<li></li>
+<li>int i = 0, j = 0;<br>int size = arr.length; </li>
+<li></li>
+<li>for (i = 0; i &lt; size - 1; i++)//一共要排序size-1次  </li>
+<li>{  </li>
+<li>//每次遍历标志位都要先置为0，才能判断后面的元素是否发生了交换  </li>
+<li>int flag = 0;  </li>
+<li></li>
+<li>for (j = 0; j &lt; size - 1 - i; j++)//选出该趟排序的最大值往后移动  </li>
+<li>{  </li>
+<li>if (arr[j] &gt; arr[j + 1])  </li>
+<li>{  </li>
+<li>int tmp = arr[j];  </li>
+<li>arr[j] = arr[j + 1];  </li>
+<li>arr[j + 1] = tmp;  </li>
+<li>flag = 1;//只要有发生了交换，flag就置为1  </li>
+<li>}  </li>
+<li>}  </li>
+<li></li>
+<li>//判断标志位是否为0，如果为0，说明后面的元素已经有序，就直接return  </li>
+<li>if (flag == 0)  </li>
+<li>{  </li>
+<li>return;  </li>
+<li>}  </li>
+<li>}  </li>
+<li></li>
+<li>}  </li>
+</ol>
+<p>5、算法优化2（优化内层循环）</p>
+<p>   (1)记住最后一次交换发生位置lastExchange的冒泡排序<br>在每趟扫描中，记住最后一次交换发生的位置lastExchange，（该位置之后的相邻记录均已有序）。下一趟排序开始时，R[1..lastExchange-1]是无序区，R[lastExchange..n]是有序区。这样，一趟排序可能使当前无序区扩充多个记录，因此记住最后一次交换发生的位置lastExchange，从而减少排序的趟数。<br>具体算法：<br>[cpp]<br>view plain<br>copy</p>
+<ol start="31">
+<li>//冒泡排序优化2  </li>
+<li>void BubbleSort3(int[] arr)  </li>
+<li>{  </li>
+<li></li>
+<li>int i = 0, j = 0;</li>
+<li>int size = arr.length;  </li>
+<li>int k = size - 1,pos = 0;//pos变量用来标记循环里最后一次交换的位置    </li>
+<li></li>
+<li>for (i = 0; i &lt; size - 1; i++)//一共要排序size-1次  </li>
+<li>{  </li>
+<li>//每次遍历标志位都要先置为0，才能判断后面的元素是否发生了交换  </li>
+<li>int flag = 0;  </li>
+<li></li>
+<li>for (j = 0; j &lt;k; j++)//选出该趟排序的最大值往后移动  </li>
+<li>{  </li>
+<li>if (arr[j] &gt; arr[j + 1])  </li>
+<li>{  </li>
+<li>int tmp = arr[j];  </li>
+<li>arr[j] = arr[j + 1];  </li>
+<li>arr[j + 1] = tmp;  </li>
+<li>flag = 1;//只要有发生了交换，flag就置为1  </li>
+<li>pos = j;//循环里最后一次交换的位置 j赋给pos  </li>
+<li>}  </li>
+<li>}  </li>
+<li></li>
+<li>k = pos;  </li>
+<li>//判断标志位是否为0，如果为0，说明后面的元素已经有序，就直接return  </li>
+<li>if (flag == 0)  </li>
+<li>{  </li>
+<li>return;  </li>
+<li>}  </li>
+<li>}  </li>
+<li></li>
+<li>}  </li>
+</ol>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    
+    <div class="content">
+        
+<span class="post-time">
+    Last updated: <time datetime="2018-04-29T06:42:47.039Z" itemprop="dateUpdated">2018-04-29 14:42:47</time>
+</span><br>
+
+
+        
+        原始链接：<a href="/2018/04/16/冒泡排序/" target="_blank" rel="external">http://ruanlz.github.io/2018/04/16/冒泡排序/</a>
+        
+    </div>
+    
+    <footer>
+        <a href="http://ruanlz.github.io">
+            <img src="/img/avatar.jpg" alt="阮新宇">
+            阮新宇
+        </a>
+    </footer>
+</blockquote>
+
+        
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
+</div>
+
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/基础知识/">基础知识</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/算法排序/">算法排序</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://ruanlz.github.io/2018/04/16/冒泡排序/&title=《冒泡排序》 — ruanlz's Blog&pic=http://ruanlz.github.io/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://ruanlz.github.io/2018/04/16/冒泡排序/&title=《冒泡排序》 — ruanlz's Blog&source=阮新宇的成长记录" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://ruanlz.github.io/2018/04/16/冒泡排序/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《冒泡排序》 — ruanlz's Blog&url=http://ruanlz.github.io/2018/04/16/冒泡排序/&via=http://ruanlz.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://ruanlz.github.io/2018/04/16/冒泡排序/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2018/04/16/选择排序/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">选择排序</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2018/04/16/基数排序/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">基数排序</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+<div id="reward" class="page-modal reward-lay">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        谢谢您的打赏
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" src="/img/wechat.jpg" alt="打赏二维码">
+        </div>
+        
+        <label class="reward-toggle">
+            <input id="rewardToggle" type="checkbox" class="reward-toggle-check"
+                data-wechat="/img/wechat.jpg" data-alipay="/img/alipay.jpg">
+            <div class="reward-toggle-ctrol">
+                <span class="reward-toggle-item wechat">微信</span>
+                <span class="reward-toggle-label"></span>
+                <span class="reward-toggle-item alipay">支付宝</span>
+            </div>
+        </label>
+        
+    </div>
+</div>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            
+                <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            
+            <span>This blog is licensed under a <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.</span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>阮新宇 &copy; 2015 - 2018</span>
+            <span>
+                
+                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://ruanlz.github.io/2018/04/16/冒泡排序/&title=《冒泡排序》 — ruanlz's Blog&pic=http://ruanlz.github.io/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://ruanlz.github.io/2018/04/16/冒泡排序/&title=《冒泡排序》 — ruanlz's Blog&source=阮新宇的成长记录" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://ruanlz.github.io/2018/04/16/冒泡排序/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《冒泡排序》 — ruanlz's Blog&url=http://ruanlz.github.io/2018/04/16/冒泡排序/&via=http://ruanlz.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://ruanlz.github.io/2018/04/16/冒泡排序/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMYAAADGCAAAAACs8KCBAAACIUlEQVR42u3aQW7kMAwEwPz/07PXBYJ1uillAUul02BgyC4faFLk11e8Pt/W3/8/X5/s/PzPtoWBgfFaxudxtY/Vvojvj/6v+z7vgIGBcQPjORTmgJVQm98XAwMDIw+C69fn+2BgYGC0gS9PKNsEEQMDA2OliP2NAjV5fZtrcQwMjBcy8tL0///+lf4GBgbGqxifcuUBcW/6+MM+GBgYRzPyALee/LXguv2AgYFxKCMPds83ax9rFnyLXigGBsZBjL2DFDPerEkw/G5gYGC8kDFrIrZjEy2mbUhgYGCczWibAevBtP4alOU0BgbGDYxZadrevk03N3RcMTAwjmC0YXElyWuL4TxtxcDAOJWxd8xiFo5nAAwMjNsY7SBpGy5n1xTlKwYGxqGMXedzu8raYSmLgYFxDaNN3dqDsJXCuBi2wMDAOJoxG6RoA+UsHSyaARgYGMcx2tJ0vWRN0se8RYGBgXEbox2DSMJucmQ2G1qNBsIwMDAOYuTla97IbNuTs9BftAcwMDAOYuSP2A625tR2TwwMjJsZs1J2lkrO2hIYGBg3MD7lmp1xta2FPMRHlTEGBsbLGXtHJZKj/1mCmDQMMDAwzma0h/V5EFwJ38VYGAYGxjWMWXuyHZVY/wLU/Q0MDIzrGTlsVwsz8mFgYFzPyNsD+SNueGUYGBgXMJIitsXkbdG8kfBDJxYDA+NQxizvmh36t8VtHqYxMDAOZfwBVNd0cnvdVrwAAAAASUVORK5CYII=" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: true };
+
+
+</script>
+
+<script src="//unpkg.com/hexo-site@latest/js/main.min.js"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="//unpkg.com/hexo-site@latest/js/search.min.js" async></script>
+
+
+
+
+
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = '您还会回来吗？';
+            clearTimeout(titleTime);
+        } else {
+            document.title = '欢迎回来！';
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script>
+
+
+
+</body>
+</html>

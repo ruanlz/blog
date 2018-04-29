@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    
+    <title>桶排序 | ruanlz&#39;s Blog | 路漫漫其修远兮，吾将上下而求索</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="算法排序,基础知识">
+    <meta name="description" content="桶排序也叫箱排序。工作的原理是将数组元素映射到有限数量个桶里，利用计数排序可以定位桶的边界，每个桶再各自进行桶内排序（使用其它排序算法或以递归方式继续使用桶排序）。桶排序的实现代码如下： #includeusing namespace std;// 分类 ————- 内部非比较排序// 数据结构 ——— 数组// 最差时间复杂度 —- O(nlogn)或O(n^2)，只有一个桶，取决于桶内排序方式">
+<meta name="keywords" content="算法排序,基础知识">
+<meta property="og:type" content="article">
+<meta property="og:title" content="桶排序">
+<meta property="og:url" content="http://ruanlz.github.io/2018/04/16/桶排序/index.html">
+<meta property="og:site_name" content="ruanlz&#39;s Blog">
+<meta property="og:description" content="桶排序也叫箱排序。工作的原理是将数组元素映射到有限数量个桶里，利用计数排序可以定位桶的边界，每个桶再各自进行桶内排序（使用其它排序算法或以递归方式继续使用桶排序）。桶排序的实现代码如下： #includeusing namespace std;// 分类 ————- 内部非比较排序// 数据结构 ——— 数组// 最差时间复杂度 —- O(nlogn)或O(n^2)，只有一个桶，取决于桶内排序方式">
+<meta property="og:locale" content="ZH">
+<meta property="og:updated_time" content="2018-04-29T06:42:47.084Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="桶排序">
+<meta name="twitter:description" content="桶排序也叫箱排序。工作的原理是将数组元素映射到有限数量个桶里，利用计数排序可以定位桶的边界，每个桶再各自进行桶内排序（使用其它排序算法或以递归方式继续使用桶排序）。桶排序的实现代码如下： #includeusing namespace std;// 分类 ————- 内部非比较排序// 数据结构 ——— 数组// 最差时间复杂度 —- O(nlogn)或O(n^2)，只有一个桶，取决于桶内排序方式">
+    
+        <link rel="alternate" type="application/atom+xml" title="ruanlz&#39;s Blog" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="stylesheet" href="//unpkg.com/hexo-site@latest/css/style.css">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">阮新宇</h5>
+          <a href="mailto:1096421257@qq.com" title="1096421257@qq.com" class="mail">1096421257@qq.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                归档
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                标签
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                分类
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/ruanlz" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">桶排序</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="Search">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">桶排序</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2018-04-16T15:20:40.000Z" itemprop="datePublished" class="page-time">
+  2018-04-16
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/基础知识/">基础知识</a><ul class="article-category-list-child"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/基础知识/算法排序/">算法排序</a></li></ul></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+
+<article id="post-桶排序"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">桶排序</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2018-04-16 23:20:40" datetime="2018-04-16T15:20:40.000Z"  itemprop="datePublished">2018-04-16</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/基础知识/">基础知识</a><ul class="article-category-list-child"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/基础知识/算法排序/">算法排序</a></li></ul></li></ul>
+
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <p>桶排序也叫箱排序。工作的原理是将数组元素映射到有限数量个桶里，利用计数排序可以定位桶的边界，每个桶再各自进行桶内排序（使用其它排序算法或以递归方式继续使用桶排序）。<br>桶排序的实现代码如下：</p>
+<p>#include<iostream><br>using namespace std;<br>// 分类 ————- 内部非比较排序<br>// 数据结构 ——— 数组<br>// 最差时间复杂度 —- O(nlogn)或O(n^2)，只有一个桶，取决于桶内排序方式<br>// 最优时间复杂度 —- O(n)，每个元素占一个桶<br>// 平均时间复杂度 —- O(n)，保证各个桶内元素个数均匀即可<br>// 所需辅助空间 —— O(n + bn)<br>// 稳定性 ———– 稳定<br>/<em> 本程序用数组模拟桶 </em>/<br>const int bn = 5;    // 这里排序[0,49]的元素，使用5个桶就够了，也可以根据输入动态确定桶的数量<br>int C[bn];           // 计数数组，存放桶的边界信息<br>void InsertionSort(int A[], int left, int right)<br>{<br>    for (int i = left + 1; i &lt;= right; i++)  // 从第二张牌开始抓，直到最后一张牌<br>    {<br>        int get = A[i];<br>        int j = i - 1;<br>        while (j &gt;= left &amp;&amp; A[j] &gt; get)<br>        {<br>            A[j + 1] = A[j];<br>            j–;<br>        }<br>        A[j + 1] = get;<br>    }<br>}<br>int MapToBucket(int x)<br>{<br>    return x / 10;    // 映射函数f(x)，作用相当于快排中的Partition，把大量数据分割成基本有序的数据块<br>}<br>void CountingSort(int A[], int n)<br>{<br>    for (int i = 0; i &lt; bn; i++)<br>    {<br>        C[i] = 0;<br>    }<br>    for (int i = 0; i &lt; n; i++)     // 使C[i]保存着i号桶中元素的个数<br>    {<br>        C[MapToBucket(A[i])]++;<br>    }<br>    for (int i = 1; i &lt; bn; i++)    // 定位桶边界：初始时，C[i]-1为i号桶最后一个元素的位置<br>    {<br>        C[i] = C[i] + C[i - 1];<br>    }<br>    int <em>B = (int </em>)malloc((n) * sizeof(int));<br>    for (int i = n - 1; i &gt;= 0; i–)// 从后向前扫描保证计数排序的稳定性(重复元素相对次序不变)<br>    {<br>        int b = MapToBucket(A[i]);  // 元素A[i]位于b号桶<br>        B[–C[b]] = A[i];           // 把每个元素A[i]放到它在输出数组B中的正确位置上<br>                                    // 桶的边界被更新：C[b]为b号桶第一个元素的位置<br>    }<br>    for (int i = 0; i &lt; n; i++)<br>    {<br>        A[i] = B[i];<br>    }<br>    free(B);<br>}<br>void BucketSort(int A[], int n)<br>{<br>    CountingSort(A, n);          // 利用计数排序确定各个桶的边界（分桶）<br>    for (int i = 0; i &lt; bn; i++) // 对每一个桶中的元素应用插入排序<br>    {<br>        int left = C[i];         // C[i]为i号桶第一个元素的位置<br>        int right = (i == bn - 1 ? n - 1 : C[i + 1] - 1);// C[i+1]-1为i号桶最后一个元素的位置<br>        if (left &lt; right)        // 对元素个数大于1的桶进行桶内插入排序<br>            InsertionSort(A, left, right);<br>    }<br>}<br>int main()<br>{<br>    int A[] = { 29, 25, 3, 49, 9, 37, 21, 43 };// 针对桶排序设计的输入<br>    int n = sizeof(A) / sizeof(int);<br>    BucketSort(A, n);<br>    printf(“桶排序结果：”);<br>    for (int i = 0; i &lt; n; i++)<br>    {<br>        printf(“%d “, A[i]);<br>    }<br>    printf(“\n”);<br>    return 0;<br>}</iostream></p>
+<p> 　　下图给出了对{ 29, 25, 3, 49, 9, 37, 21, 43 }进行桶排序的简单演示过程</p>
+<p>桶排序不是比较排序，不受到O(nlogn)下限的影响，它是鸽巢排序的一种归纳结果，当所要排序的数组值分散均匀的时候，桶排序拥有线性的时间复杂度。</p>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    
+    <div class="content">
+        
+<span class="post-time">
+    Last updated: <time datetime="2018-04-29T06:42:47.084Z" itemprop="dateUpdated">2018-04-29 14:42:47</time>
+</span><br>
+
+
+        
+        原始链接：<a href="/2018/04/16/桶排序/" target="_blank" rel="external">http://ruanlz.github.io/2018/04/16/桶排序/</a>
+        
+    </div>
+    
+    <footer>
+        <a href="http://ruanlz.github.io">
+            <img src="/img/avatar.jpg" alt="阮新宇">
+            阮新宇
+        </a>
+    </footer>
+</blockquote>
+
+        
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
+</div>
+
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/基础知识/">基础知识</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/算法排序/">算法排序</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://ruanlz.github.io/2018/04/16/桶排序/&title=《桶排序》 — ruanlz's Blog&pic=http://ruanlz.github.io/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://ruanlz.github.io/2018/04/16/桶排序/&title=《桶排序》 — ruanlz's Blog&source=阮新宇的成长记录" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://ruanlz.github.io/2018/04/16/桶排序/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《桶排序》 — ruanlz's Blog&url=http://ruanlz.github.io/2018/04/16/桶排序/&via=http://ruanlz.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://ruanlz.github.io/2018/04/16/桶排序/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2018/04/16/插入排序/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">插入排序</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2018/04/16/虽yi/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">qqqqqqqqqqqggggggggggggqqqqqqqqqqqq</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+<div id="reward" class="page-modal reward-lay">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        谢谢您的打赏
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" src="/img/wechat.jpg" alt="打赏二维码">
+        </div>
+        
+        <label class="reward-toggle">
+            <input id="rewardToggle" type="checkbox" class="reward-toggle-check"
+                data-wechat="/img/wechat.jpg" data-alipay="/img/alipay.jpg">
+            <div class="reward-toggle-ctrol">
+                <span class="reward-toggle-item wechat">微信</span>
+                <span class="reward-toggle-label"></span>
+                <span class="reward-toggle-item alipay">支付宝</span>
+            </div>
+        </label>
+        
+    </div>
+</div>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            
+                <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            
+            <span>This blog is licensed under a <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.</span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>阮新宇 &copy; 2015 - 2018</span>
+            <span>
+                
+                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://ruanlz.github.io/2018/04/16/桶排序/&title=《桶排序》 — ruanlz's Blog&pic=http://ruanlz.github.io/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://ruanlz.github.io/2018/04/16/桶排序/&title=《桶排序》 — ruanlz's Blog&source=阮新宇的成长记录" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://ruanlz.github.io/2018/04/16/桶排序/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《桶排序》 — ruanlz's Blog&url=http://ruanlz.github.io/2018/04/16/桶排序/&via=http://ruanlz.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://ruanlz.github.io/2018/04/16/桶排序/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMYAAADGCAAAAACs8KCBAAACKElEQVR42u3aS5KDMAxFUfa/6fQCOib3SWaAfBlRBXE4pErRx9eFj8/i+H/P6v77NVfrbD5kyJDxWsbn9uBf2eHdn5OXKEOGjBMYqwi2uoew73n3kZM/mwwZMmQQRhocycoyZMiQsYvBi89OuilDhgwZvIgl9/OAy4vbzbW4DBkyXsjoFJZPnz8y35AhQ8arGLWgSUaSvN22IZTLkCFjNIMHuM7QMR121p5HhgwZsxm8HcZDMN8Q1lmn2NWTIUPGqxhkCwVv/dfSvnRE+uWqDBkyRjPSpnxK5QE3LZi/XJUhQ8YBjE64rJW1PNNDfwkyZMgYykgBzyV8HbYMGTJmM2phLr1KXgdZDa0gQ4aMcYz+15MEkaSVfIVl11CGDBkHMHgo5OdBJd2ZS8qQIWM0I23WE17ncfn6F39PMmTIGMRIm2IkNeSpZC3Eo+1iMmTIGMTgTa69g89aSy74BWTIkPFyxq7GGWqKhQNRHtBlyJAxm8ELUVKg7g2mxXGpDBkyhjL6j8KHjul5MECVIUPGYQzeaKulg50tHTJkyJCRlpppo7+Wy23LbWXIkPFCRqeJlo4Y+WizmBTKkCFjKGPvDqs0TNc2WKRhXYYMGTMYnSAbFJkYw59BhgwZpzHSwMcHmbzdxkM/arfJkCHjYEb6qbS4LW7FkCFDhgw81OThMn1lP9JKGTJkHMAgCV8KqG0j48WtDBkyzmHUSsfaQp2NGjytlCFDxiDGH/Fc+giUEzDoAAAAAElFTkSuQmCC" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: true };
+
+
+</script>
+
+<script src="//unpkg.com/hexo-site@latest/js/main.min.js"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="//unpkg.com/hexo-site@latest/js/search.min.js" async></script>
+
+
+
+
+
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = '您还会回来吗？';
+            clearTimeout(titleTime);
+        } else {
+            document.title = '欢迎回来！';
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script>
+
+
+
+</body>
+</html>

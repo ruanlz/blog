@@ -5,21 +5,21 @@
   <subtitle>路漫漫其修远兮，吾将上下而求索</subtitle>
   <link href="/atom.xml" rel="self"/>
   
-  <link href="http://ruanxinyu.github.io/"/>
+  <link href="http://ruanlz.github.io/"/>
   <updated>2018-04-21T12:33:00.748Z</updated>
-  <id>http://ruanxinyu.github.io/</id>
+  <id>http://ruanlz.github.io/</id>
   
   <author>
     <name>阮临政</name>
-    <email>1096421257@qq.com</email>
+    <email>179795514@qq.com</email>
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
     <title></title>
-    <link href="http://ruanxinyu.github.io/2018/04/21/%E8%99%BDyi/"/>
-    <id>http://ruanxinyu.github.io/2018/04/21/虽yi/</id>
+    <link href="http://ruanlz.github.io/2018/04/21/%E8%99%BDyi/"/>
+    <id>http://ruanlz.github.io/2018/04/21/虽yi/</id>
     <published>2018-04-21T12:33:00.748Z</published>
     <updated>2018-04-21T12:33:00.748Z</updated>
     
@@ -32,8 +32,8 @@
   
   <entry>
     <title></title>
-    <link href="http://ruanxinyu.github.io/2018/04/18/Markdown%E8%AF%AD%E6%B3%95%E5%85%A5%E9%97%A8/"/>
-    <id>http://ruanxinyu.github.io/2018/04/18/Markdown语法入门/</id>
+    <link href="http://ruanlz.github.io/2018/04/18/Markdown%E8%AF%AD%E6%B3%95%E5%85%A5%E9%97%A8/"/>
+    <id>http://ruanlz.github.io/2018/04/18/Markdown语法入门/</id>
     <published>2018-04-18T13:29:05.029Z</published>
     <updated>2018-04-21T12:37:56.771Z</updated>
     
@@ -46,8 +46,8 @@
   
   <entry>
     <title>虚拟机安装CentOS教程</title>
-    <link href="http://ruanxinyu.github.io/2018/04/16/%E8%99%9A%E6%8B%9F%E6%9C%BA%E5%AE%89%E8%A3%85CentOS%E6%95%99%E7%A8%8B/"/>
-    <id>http://ruanxinyu.github.io/2018/04/16/虚拟机安装CentOS教程/</id>
+    <link href="http://ruanlz.github.io/2018/04/16/%E8%99%9A%E6%8B%9F%E6%9C%BA%E5%AE%89%E8%A3%85CentOS%E6%95%99%E7%A8%8B/"/>
+    <id>http://ruanlz.github.io/2018/04/16/虚拟机安装CentOS教程/</id>
     <published>2018-04-16T15:20:40.000Z</published>
     <updated>2018-04-20T12:56:37.647Z</updated>
     
@@ -62,21 +62,21 @@
     
     </summary>
     
-      <category term="技术分享" scheme="http://ruanxinyu.github.io/categories/%E6%8A%80%E6%9C%AF%E5%88%86%E4%BA%AB/"/>
+      <category term="技术分享" scheme="http://ruanlz.github.io/categories/%E6%8A%80%E6%9C%AF%E5%88%86%E4%BA%AB/"/>
     
-      <category term="工具安装" scheme="http://ruanxinyu.github.io/categories/%E6%8A%80%E6%9C%AF%E5%88%86%E4%BA%AB/%E5%B7%A5%E5%85%B7%E5%AE%89%E8%A3%85/"/>
+      <category term="工具安装" scheme="http://ruanlz.github.io/categories/%E6%8A%80%E6%9C%AF%E5%88%86%E4%BA%AB/%E5%B7%A5%E5%85%B7%E5%AE%89%E8%A3%85/"/>
     
     
-      <category term="工具安装" scheme="http://ruanxinyu.github.io/tags/%E5%B7%A5%E5%85%B7%E5%AE%89%E8%A3%85/"/>
+      <category term="工具安装" scheme="http://ruanlz.github.io/tags/%E5%B7%A5%E5%85%B7%E5%AE%89%E8%A3%85/"/>
     
-      <category term="操作系统" scheme="http://ruanxinyu.github.io/tags/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/"/>
+      <category term="操作系统" scheme="http://ruanlz.github.io/tags/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/"/>
     
   </entry>
   
   <entry>
     <title>JDK安装教程</title>
-    <link href="http://ruanxinyu.github.io/2018/04/15/JDK%E5%AE%89%E8%A3%85%E6%95%99%E7%A8%8B/"/>
-    <id>http://ruanxinyu.github.io/2018/04/15/JDK安装教程/</id>
+    <link href="http://ruanlz.github.io/2018/04/15/JDK%E5%AE%89%E8%A3%85%E6%95%99%E7%A8%8B/"/>
+    <id>http://ruanlz.github.io/2018/04/15/JDK安装教程/</id>
     <published>2018-04-15T06:53:32.000Z</published>
     <updated>2018-04-16T15:39:05.741Z</updated>
     
@@ -92,10 +92,10 @@
     
     </summary>
     
-      <category term="技术分享" scheme="http://ruanxinyu.github.io/categories/%E6%8A%80%E6%9C%AF%E5%88%86%E4%BA%AB/"/>
+      <category term="技术分享" scheme="http://ruanlz.github.io/categories/%E6%8A%80%E6%9C%AF%E5%88%86%E4%BA%AB/"/>
     
     
-      <category term="Java" scheme="http://ruanxinyu.github.io/tags/Java/"/>
+      <category term="Java" scheme="http://ruanlz.github.io/tags/Java/"/>
     
   </entry>
   

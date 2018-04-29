@@ -1,0 +1,494 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    
+    <title>归并排序 | ruanlz&#39;s Blog | 路漫漫其修远兮，吾将上下而求索</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="算法排序,基础知识">
+    <meta name="description" content="归并排序是创建在归并操作上的一种有效的排序算法，效率为O(nlogn)，1945年由冯·诺伊曼首次提出。归并排序算法主要依赖归并(Merge)操作。归并操作指的是将两个已经排序的序列合并成一个序列的操作，归并操作步骤如下： 1. 申请空间，使其大小为两个已经排序序列之和，该空间用来存放合并后的序列 2. 设定两个指针，最初位置分别为两个已经排序序列的起始位置 3. 比较两个指针所指向的元素，选择相">
+<meta name="keywords" content="算法排序,基础知识">
+<meta property="og:type" content="article">
+<meta property="og:title" content="归并排序">
+<meta property="og:url" content="http://ruanlz.github.io/2018/04/16/归并排序/index.html">
+<meta property="og:site_name" content="ruanlz&#39;s Blog">
+<meta property="og:description" content="归并排序是创建在归并操作上的一种有效的排序算法，效率为O(nlogn)，1945年由冯·诺伊曼首次提出。归并排序算法主要依赖归并(Merge)操作。归并操作指的是将两个已经排序的序列合并成一个序列的操作，归并操作步骤如下： 1. 申请空间，使其大小为两个已经排序序列之和，该空间用来存放合并后的序列 2. 设定两个指针，最初位置分别为两个已经排序序列的起始位置 3. 比较两个指针所指向的元素，选择相">
+<meta property="og:locale" content="ZH">
+<meta property="og:updated_time" content="2018-04-29T06:42:47.063Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="归并排序">
+<meta name="twitter:description" content="归并排序是创建在归并操作上的一种有效的排序算法，效率为O(nlogn)，1945年由冯·诺伊曼首次提出。归并排序算法主要依赖归并(Merge)操作。归并操作指的是将两个已经排序的序列合并成一个序列的操作，归并操作步骤如下： 1. 申请空间，使其大小为两个已经排序序列之和，该空间用来存放合并后的序列 2. 设定两个指针，最初位置分别为两个已经排序序列的起始位置 3. 比较两个指针所指向的元素，选择相">
+    
+        <link rel="alternate" type="application/atom+xml" title="ruanlz&#39;s Blog" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="stylesheet" href="//unpkg.com/hexo-site@latest/css/style.css">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">阮新宇</h5>
+          <a href="mailto:1096421257@qq.com" title="1096421257@qq.com" class="mail">1096421257@qq.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                归档
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                标签
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                分类
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/ruanlz" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">归并排序</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="Search">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">归并排序</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2018-04-16T15:20:40.000Z" itemprop="datePublished" class="page-time">
+  2018-04-16
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/基础知识/">基础知识</a><ul class="article-category-list-child"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/基础知识/算法排序/">算法排序</a></li></ul></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+
+<article id="post-归并排序"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">归并排序</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2018-04-16 23:20:40" datetime="2018-04-16T15:20:40.000Z"  itemprop="datePublished">2018-04-16</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/基础知识/">基础知识</a><ul class="article-category-list-child"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/基础知识/算法排序/">算法排序</a></li></ul></li></ul>
+
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <p>归并排序是创建在归并操作上的一种有效的排序算法，效率为O(nlogn)，1945年由冯·诺伊曼首次提出。<br>归并排序算法主要依赖归并(Merge)操作。归并操作指的是将两个已经排序的序列合并成一个序列的操作，归并操作步骤如下：</p>
+<pre><code>1. 申请空间，使其大小为两个已经排序序列之和，该空间用来存放合并后的序列
+2. 设定两个指针，最初位置分别为两个已经排序序列的起始位置
+3. 比较两个指针所指向的元素，选择相对小的元素放入到合并空间，并移动指针到下一位置
+4. 重复步骤3直到某一指针到达序列尾
+5. 将另一序列剩下的所有元素直接复制到合并序列尾
+</code></pre><p>归并排序的代码如下：</p>
+<p>#include &lt;stdio.h&gt;</p>
+<p>#include &lt;limits.h&gt;<br>// 分类 ————– 内部比较排序<br>// 数据结构 ———- 数组<br>// 最差时间复杂度 —- O(nlogn)<br>// 最优时间复杂度 —- O(nlogn)<br>// 平均时间复杂度 —- O(nlogn)<br>// 所需辅助空间 —— O(n)<br>// 稳定性 ———— 稳定<br>void Merge(int A[], int left, int mid, int right)// 合并两个已排好序的数组A[left…mid]和A[mid+1…right]<br>{<br>    int len = right - left + 1;<br>    int <em>temp = new int[len];       // 辅助空间O(n)<br>    int index = 0;<br>    int i = left;                   // 前一数组的起始元素<br>    int j = mid + 1;                // 后一数组的起始元素<br>    while (i &lt;= mid &amp;&amp; j &lt;= right)<br>    {<br>        temp[index++] = A[i] &lt;= A[j] ? A[i++] : A[j++];  // 带等号保证归并排序的稳定性<br>    }<br>    while (i &lt;= mid)<br>    {<br>        temp[index++] = A[i++];<br>    }<br>    while (j &lt;= right)<br>    {<br>        temp[index++] = A[j++];<br>    }<br>    for (int k = 0; k &lt; len; k++)<br>    {<br>        A[left++] = temp[k];<br>    }<br>}<br>void MergeSortRecursion(int A[], int left, int right)    // 递归实现的归并排序(自顶向下)<br>{<br>    if (left == right)    // 当待排序的序列长度为1时，递归开始回溯，进行merge操作<br>        return;<br>    int mid = (left + right) / 2;<br>    MergeSortRecursion(A, left, mid);<br>    MergeSortRecursion(A, mid + 1, right);<br>    Merge(A, left, mid, right);<br>}<br>void MergeSortIteration(int A[], int len)    // 非递归(迭代)实现的归并排序(自底向上)<br>{<br>    int left, mid, right;// 子数组索引,前一个为A[left…mid]，后一个子数组为A[mid+1…right]<br>    for (int i = 1; i &lt; len; i </em>= 2)        // 子数组的大小i初始为1，每轮翻倍<br>    {<br>        left = 0;<br>        while (left + i &lt; len)              // 后一个子数组存在(需要归并)<br>        {<br>            mid = left + i - 1;<br>            right = mid + i &lt; len ? mid + i : len - 1;// 后一个子数组大小可能不够<br>            Merge(A, left, mid, right);<br>            left = right + 1;               // 前一个子数组索引向后移动<br>        }<br>    }<br>}<br>int main()<br>{<br>    int A1[] = { 6, 5, 3, 1, 8, 7, 2, 4 };      // 从小到大归并排序<br>    int A2[] = { 6, 5, 3, 1, 8, 7, 2, 4 };<br>    int n1 = sizeof(A1) / sizeof(int);<br>    int n2 = sizeof(A2) / sizeof(int);<br>    MergeSortRecursion(A1, 0, n1 - 1);          // 递归实现<br>    MergeSortIteration(A2, n2);                 // 非递归实现<br>    printf(“递归实现的归并排序结果：”);<br>    for (int i = 0; i &lt; n1; i++)<br>    {<br>        printf(“%d “, A1[i]);<br>    }<br>    printf(“\n”);<br>    printf(“非递归实现的归并排序结果：”);<br>    for (int i = 0; i &lt; n2; i++)<br>    {<br>        printf(“%d “, A2[i]);<br>    }<br>    printf(“\n”);<br>    return 0;<br>}</p>
+<p>上述代码对序列{ 6, 5, 3, 1, 8, 7, 2, 4 }进行归并排序的实例如下</p>
+<p>使用归并排序为一列数字进行排序的宏观过程：</p>
+<p>归并排序除了可以对数组进行排序，还可以高效的求出数组小和（即单调和）以及数组中的逆序对，详见这篇博文。</p>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    
+    <div class="content">
+        
+<span class="post-time">
+    Last updated: <time datetime="2018-04-29T06:42:47.063Z" itemprop="dateUpdated">2018-04-29 14:42:47</time>
+</span><br>
+
+
+        
+        原始链接：<a href="/2018/04/16/归并排序/" target="_blank" rel="external">http://ruanlz.github.io/2018/04/16/归并排序/</a>
+        
+    </div>
+    
+    <footer>
+        <a href="http://ruanlz.github.io">
+            <img src="/img/avatar.jpg" alt="阮新宇">
+            阮新宇
+        </a>
+    </footer>
+</blockquote>
+
+        
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
+</div>
+
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/基础知识/">基础知识</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/算法排序/">算法排序</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://ruanlz.github.io/2018/04/16/归并排序/&title=《归并排序》 — ruanlz's Blog&pic=http://ruanlz.github.io/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://ruanlz.github.io/2018/04/16/归并排序/&title=《归并排序》 — ruanlz's Blog&source=阮新宇的成长记录" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://ruanlz.github.io/2018/04/16/归并排序/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《归并排序》 — ruanlz's Blog&url=http://ruanlz.github.io/2018/04/16/归并排序/&via=http://ruanlz.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://ruanlz.github.io/2018/04/16/归并排序/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2018/04/21/Nihao-blog/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">Nihao,blog</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2018/04/16/选择排序/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">选择排序</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+<div id="reward" class="page-modal reward-lay">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        谢谢您的打赏
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" src="/img/wechat.jpg" alt="打赏二维码">
+        </div>
+        
+        <label class="reward-toggle">
+            <input id="rewardToggle" type="checkbox" class="reward-toggle-check"
+                data-wechat="/img/wechat.jpg" data-alipay="/img/alipay.jpg">
+            <div class="reward-toggle-ctrol">
+                <span class="reward-toggle-item wechat">微信</span>
+                <span class="reward-toggle-label"></span>
+                <span class="reward-toggle-item alipay">支付宝</span>
+            </div>
+        </label>
+        
+    </div>
+</div>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            
+                <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            
+            <span>This blog is licensed under a <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.</span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>阮新宇 &copy; 2015 - 2018</span>
+            <span>
+                
+                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://ruanlz.github.io/2018/04/16/归并排序/&title=《归并排序》 — ruanlz's Blog&pic=http://ruanlz.github.io/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://ruanlz.github.io/2018/04/16/归并排序/&title=《归并排序》 — ruanlz's Blog&source=阮新宇的成长记录" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://ruanlz.github.io/2018/04/16/归并排序/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《归并排序》 — ruanlz's Blog&url=http://ruanlz.github.io/2018/04/16/归并排序/&via=http://ruanlz.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://ruanlz.github.io/2018/04/16/归并排序/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMYAAADGCAAAAACs8KCBAAACJUlEQVR42u3aS26EQAxFUfa/aSJl2k3pPhuU4Lo1anUI4TBw/DsOfM7fs/78ef3VT6/uvL7nDUeGDBmvZZzLQxjkG/IK1ne7ejYZMmTswyBBloRXDuYvhYRpGTJkyFinax0AgcmQIUNGGnBr35OQLUOGDBlrBili0xSwBni8FpchQ8YLGXcNBp74/AfzDRkyZPwzxhmelMqba50jQ4aM2Yx03YEPIEl7rtaqu7yzDBkyRjNIlsWba4REiuF0vUyGDBk7MNJFBw7uDywDmAwZMsYxeBpHHoi353hxi4apMmTI2IzRSdo6gbgWOWXIkLEnA/1aqfStXYmSVxkyZGzMSBM4UojyRw8CtwwZMkYz0qWHNDVMm/u1vyVDhozZjHRAyJHpGDIN3zJkyNiZwZO/flKYDhWCEaYMGTIGMdLHSgN0p3yNR6EyZMgYyiBlZ600TQvjWokrQ4aM3Ridh0PLWzgox1fKkCFjNCNtbHXGk52GXZCeypAhYxyjn67dtULBA/3R+T8gQ4aM1zLuSgE7YTcN3F+KWBkyZAxl1JI/DubjybTdhhJEGTJkjGCc4UmnoyhQhmWzDBkydmOkqxL84ThvveRRe00yZMiYx6gtQ/DytZY+psWzDBkydmCQAFobT/IX0VrFkCFDhox2a6zTvEOLazJkyJDxwPIEL5JRsJYhQ8YGDB7mak359d06+Z4MGTJ2YHQGA7UBJ080+eqYDBkyhjJ+AAy8qHb7VO6RAAAAAElFTkSuQmCC" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: true };
+
+
+</script>
+
+<script src="//unpkg.com/hexo-site@latest/js/main.min.js"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="//unpkg.com/hexo-site@latest/js/search.min.js" async></script>
+
+
+
+
+
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = '您还会回来吗？';
+            clearTimeout(titleTime);
+        } else {
+            document.title = '欢迎回来！';
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script>
+
+
+
+</body>
+</html>
